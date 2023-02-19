@@ -12,6 +12,8 @@ USE_BALANCE_MONEY = True
 USE_TRANSLATE_TO_ENG = True
 
 CHAT_ANSWER_FREQUENCY = 2 # как часто отвечать в групповых чатах, сколько сообщений пропускать.
+CHANNEL_ANSWER_FREQUENCY = 2 # как часто писать ответы на посты в каналах
+
 SUBSCRIBE_CHECK_TIMEOUT = 5 * 60  # как часто проверять подписку на каналы, в секундах. час = 60 * 60 = 3600
 
 

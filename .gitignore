@@ -152,3 +152,4 @@ cython_debug/
 #.idea/
 ai-with-radix-09328f41ef89.json
 balance.txt
+impersonator_bot_data.db
