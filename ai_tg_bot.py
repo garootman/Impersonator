@@ -136,12 +136,13 @@ def get_tovary():
 
 
 def get_message(what, lang):
+    init_what = what
     lang = lang.lower()
     what = what.lower()
     if MESSAGE_FILE not in os.listdir():
         print ("Message file not found, creating it")
         messages = {
-            'default_message':{'eng':"There is no mesage text for this. Add it to messages file", 'rus':'Нет текста сообщения по этому случаю. Добавьте сообщение в соответствующем файле.'}
+            'default_message':{'eng':"There is no mesage text for this case. Add it to messages file", 'rus':"Нет текста сообщения по этому случаю. Добавьте сообщение в соответствующем файле."}
         }
         with open(MESSAGE_FILE, 'w', encoding='utf-8') as f:
             json.dump(messages, f, ensure_ascii=False)
@@ -166,7 +167,10 @@ def get_message(what, lang):
             what = 'default_message'
             lang = 'eng'
 
-    return messages[what][lang]
+    msg = messages[what][lang]
+    if what == 'default_message':
+        msg += '\n' + init_what
+    return msg
 
 def get_channels_to_sub():
     # Load subscribed channels from text file
@@ -263,7 +267,7 @@ async def prospam(text, chatlist):
                 await bot.send_message(int(chat_id), text)
                 succ+=1
         except Exception as e:
-            print (f"An error occurred while trying to send the message to user {user_id}. Error: {e}")
+            print (f"An error occurred while trying to send the message to user {chat_id}. Error: {e}")
     return succ
 
     

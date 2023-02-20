@@ -3,6 +3,8 @@ openai_key="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"
 TG_TOKEN = "5566311336:AAEXq-Q_yLncQwyMaFuI463h6-7fGPDak5Q"
 NOWPAYMENTS_KEY = "87Y9HHA-GEZ4TB9-HA1S789-JXBWMTS" # PROD
 ADMIN_ID = 62408647               # тот у кого будет доступ к админ-командам
+BINANCE_USDER_ID = 51984839
+BINANCE_USER_MAIL = "dksg87@gmail.com"
 
 
 # MODULES
@@ -52,7 +54,7 @@ CRYPTO_PAYMENT_METHODS = {
 ANSWER_RATIO = 0.4  # отношение максимальной длины ответа сетки к длине вопроса. 0.4 значит что 60% объёма на вопрос, 40% - на ответ
 CONTEXT_LEN = 10    # какой длины хвост из сообщений тянуть в контекст. 10 - это 5 запросов и 5 ответов
 MAX_REQUEST_LENGHT = 4095   # сколько токенов максимально на весь запрос-ответ. максимум - 4096. можно экспериментировать.
-TOKENS_PER_WORD = {"rus":8.5, 'eng':2.2}
+TOKENS_PER_WORD = {"rus":9.5, 'eng':2.2}
 CONTIGENCY = 200   # запас токенов на каждый запрос, на всякий случай
 TEMPERATURE = 0.5 # температура запроса. читать мануалы чтобы понять что это
 

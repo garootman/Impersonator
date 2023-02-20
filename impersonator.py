@@ -1,5 +1,3 @@
-
-
 import json
 import asyncio
 from datetime import datetime, timedelta
@@ -172,13 +170,15 @@ async def send_crypto_invoice (chat_id, tovar_id, method_id):
 
 
 
-# In[ ]:
-
-
-
-
-
 # In[9]:
+
+
+async def send_binance_creds(chat_id, lang):
+    msg = get_message('binance_pay', lang).format(BINANCE_USER_MAIL, BINANCE_USDER_ID)
+    await send_msg (chat_id, msg)
+
+
+# In[10]:
 
 
 async def send_invoice (chat_id, tovar_id, method_id):
@@ -206,7 +206,7 @@ async def send_invoice (chat_id, tovar_id, method_id):
     )
 
 
-# In[10]:
+# In[11]:
 
 
 async def check_subscriptions(user_id):
@@ -229,7 +229,7 @@ async def check_subscriptions(user_id):
     return subbed, status
 
 
-# In[11]:
+# In[12]:
 
 
 async def send_unsub_message(user_id, user_data, send_true = False):
@@ -264,7 +264,7 @@ async def send_unsub_message(user_id, user_data, send_true = False):
     return status
 
 
-# In[12]:
+# In[13]:
 
 
 async def check_balance_warn():
@@ -276,7 +276,7 @@ async def check_balance_warn():
         noted_of_money_shortage = True
 
 
-# In[13]:
+# In[14]:
 
 
 async def get_user_data(user_id):
@@ -318,7 +318,7 @@ async def get_user_data(user_id):
     return user_data
 
 
-# In[14]:
+# In[15]:
 
 
 def log_message_history(chat_id, user_id, role_id, message, tokens, timestamp):
@@ -328,7 +328,7 @@ def log_message_history(chat_id, user_id, role_id, message, tokens, timestamp):
     print (f"Logged {chat_id}: {message}")
 
 
-# In[15]:
+# In[16]:
 
 
 def get_context(chat_id, role_id):
@@ -344,7 +344,7 @@ def get_context(chat_id, role_id):
     return context
 
 
-# In[16]:
+# In[17]:
 
 
 def add_money_action(user_id, chat_id, amount, desc):
@@ -355,7 +355,7 @@ def add_money_action(user_id, chat_id, amount, desc):
     print (f"Added transaction: user {user_id}, chat {chat_id}, {minus}{round(amount,8)} USD: {desc}")
 
 
-# In[17]:
+# In[18]:
 
 
 #def save_user_data(user_id, language , banned, ban_comment,subscribed, balance, sub_checked=None):
@@ -368,7 +368,7 @@ def save_user_data(user_data, sub_checked=None):
     conn.commit()    
 
 
-# In[18]:
+# In[19]:
 
 
 async def get_chat_data (chat_id, owner_id=None):
@@ -401,7 +401,7 @@ async def get_chat_data (chat_id, owner_id=None):
     return cd
 
 
-# In[19]:
+# In[20]:
 
 
 def upd_chat_counter(chat_id, skipped):
@@ -410,7 +410,7 @@ def upd_chat_counter(chat_id, skipped):
     print (f"Counter skip {chat_id}: {skipped}")
 
 
-# In[20]:
+# In[21]:
 
 
 def get_stat_msg (stats):
@@ -430,7 +430,7 @@ def get_stat_msg (stats):
     return msg.strip()
 
 
-# In[21]:
+# In[22]:
 
 
 def get_first_message_date():
@@ -443,7 +443,7 @@ def get_first_message_date():
     return minmess
 
 
-# In[22]:
+# In[23]:
 
 
 def get_statistics():
@@ -487,7 +487,7 @@ def get_statistics():
     return ret_dict
 
 
-# In[23]:
+# In[24]:
 
 
 def check_add_referal (host_id, guest_id):
@@ -518,16 +518,17 @@ def check_add_referal (host_id, guest_id):
     
 
 
-# In[24]:
+# In[25]:
 
 
 def get_all_users_from_db():
-    cursor.execute('SELECT distinct user_id, name from user_data')
+    cursor.execute('SELECT * from user_data')
     user_data = cursor.fetchall()
-    return {i['user_id']:i['name'] for i in user_data}
+#    return user_data
+    return {i['user_id']:i for i in user_data}
 
 
-# In[25]:
+# In[26]:
 
 
 def get_all_grout_chats_from_db():
@@ -536,7 +537,7 @@ def get_all_grout_chats_from_db():
     return {i['chat_id']:i['title'] for i in user_data}
 
 
-# In[26]:
+# In[27]:
 
 
 def get_users_chats(owner_id):
@@ -545,7 +546,7 @@ def get_users_chats(owner_id):
     return userchats
 
 
-# In[27]:
+# In[28]:
 
 
 def get_banned_users():
@@ -554,7 +555,7 @@ def get_banned_users():
     return {i['user_id']:i['name'] for i in user_data}
 
 
-# In[28]:
+# In[29]:
 
 
 async def send_user_menu(user_id, lang):
@@ -568,14 +569,17 @@ async def send_user_menu(user_id, lang):
 #    ["🧹 Clear","🧹 Очистка"]
 
     rm = get_role_models()
-    for i in rm:
-        reply_markup.add(InlineKeyboardButton (text=rm[i]['name'], callback_data=f"model_{i}_{user_id}"))
+    if USE_ROLE_MODELS:
+        for i in rm:
+            reply_markup.add(InlineKeyboardButton (text=rm[i]['name'], callback_data=f"model_{i}_{user_id}"))
+        reply_markup.add(InlineKeyboardButton (text="--------", callback_data=f"NONE"))
+        if lang=='eng':
+            reply_markup.row(InlineKeyboardButton("💬 Groups", callback_data='my_chats'))
+        elif lang=='rus':
+            reply_markup.row(InlineKeyboardButton("💬 Группы", callback_data='my_chats'))
 
-    reply_markup.add(InlineKeyboardButton (text="--------", callback_data=f"NONE"))
     
     if lang=='eng':
-        if (USE_ROLE_MODELS):
-            reply_markup.row(InlineKeyboardButton("💬 Groups", callback_data='my_chats'))
         reply_markup.row(InlineKeyboardButton("💰 Balance", callback_data='user_balance'), 
                          InlineKeyboardButton("🔗 Referal", callback_data='get_reflink'),)
         if (USE_SHOP):
@@ -590,8 +594,6 @@ async def send_user_menu(user_id, lang):
             reply_markup.row(InlineKeyboardButton("🆘 Contact Admin", url=admin_url))
 
     elif lang == 'rus':
-        if (USE_ROLE_MODELS):
-            reply_markup.row(InlineKeyboardButton("💬 Группы", callback_data='my_chats'))
         reply_markup.row(InlineKeyboardButton("💰 Баланс", callback_data='user_balance'), 
                          InlineKeyboardButton("🔗 Рефелал", callback_data='get_reflink'),)
         if (USE_SHOP):
@@ -622,7 +624,7 @@ async def send_user_menu(user_id, lang):
 
 
 
-# In[29]:
+# In[30]:
 
 
 async def send_admin_menu(user_id):
@@ -645,11 +647,13 @@ async def send_admin_menu(user_id):
                     )
     reply_markup.row(InlineKeyboardButton("🎁 Gift user money", callback_data='give_user_money'), 
                     )
+    reply_markup.row(InlineKeyboardButton("⬆️ Top UP to minimum", callback_data='top_up_to_min'), 
+                    )
     
     succ = await send_msg (ADMIN_ID, msg, reply_markup=reply_markup)
 
 
-# In[30]:
+# In[31]:
 
 
 async def send_shop_message(user_data):
@@ -662,7 +666,7 @@ async def send_shop_message(user_data):
     succ = await send_msg (user_data['user_id'], msg, reply_markup=reply_markup)
 
 
-# In[31]:
+# In[32]:
 
 
 async def set_curr_api_balance(message):
@@ -678,7 +682,7 @@ async def set_curr_api_balance(message):
         succ = await send_msg (ADMIN_ID, f"Could NOT write current USD balance due to error {str(e)}")
 
 
-# In[32]:
+# In[33]:
 
 
 @dp.callback_query_handler(lambda x: x.data in ['eng', 'rus'])
@@ -692,7 +696,7 @@ async def lang_select_handler(call):
     await send_user_menu(user_id, user_data['lang'])
 
 
-# In[33]:
+# In[34]:
 
 
 @dp.callback_query_handler(lambda x: x.data == 'give_user_money')
@@ -706,7 +710,7 @@ async def give_user_some_money_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[34]:
+# In[35]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='my_chats')
@@ -730,7 +734,7 @@ async def my_chats_handler(call):
     succ = await send_msg (user_id, msg, reply_markup=reply_markup)
 
 
-# In[35]:
+# In[36]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:8] =='setchat_')
@@ -747,7 +751,7 @@ async def my_chats_handler(call):
     succ = await send_msg (user_id, msg, reply_markup = reply_markup)
 
 
-# In[36]:
+# In[37]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='get_vision')
@@ -763,7 +767,7 @@ async def vision_start_handler(call, state:FSMContext):
     succ = await send_msg (user_id, msg)
 
 
-# In[37]:
+# In[38]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='rate_eur')
@@ -773,7 +777,7 @@ async def rate_eur_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[38]:
+# In[39]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='rate_rub')
@@ -783,7 +787,7 @@ async def rate_rub_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[39]:
+# In[40]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='user_balance')
@@ -794,7 +798,7 @@ async def balance_handler(call):
     succ = await send_msg (user_id, msg)
 
 
-# In[40]:
+# In[41]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='show_shop')
@@ -804,7 +808,7 @@ async def show_shop_handler(call):
     await send_shop_message(user_data)
 
 
-# In[41]:
+# In[42]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='get_reflink')
@@ -816,7 +820,7 @@ async def reflink_handler(call):
     succ = await send_msg (user_id, msg)
 
 
-# In[42]:
+# In[43]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='check')
@@ -828,7 +832,7 @@ async def check_handler(call):
     await send_unsub_message(user_id, user_data, send_true = True)
 
 
-# In[43]:
+# In[44]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='broadcast_users')
@@ -838,7 +842,7 @@ async def broadcast_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[44]:
+# In[45]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='broadcast_chats')
@@ -852,7 +856,7 @@ async def broadcast_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[45]:
+# In[46]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='set_curr_api_balance')
@@ -864,7 +868,34 @@ async def set_curr_api_balance_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)    
 
 
-# In[46]:
+# In[47]:
+
+
+@dp.callback_query_handler(lambda x: x.data =='top_up_to_min')
+async def stats_handler(call):
+    print (f"Will top up all balances to MINIMUM!")
+    user_dict = get_all_users_from_db()
+    gifted = 0.0
+    topped = 0
+    for user_id in user_dict:
+        user_data = user_dict[user_id]
+        if user_data['balance'] < INITIAL_DEMO_USD_BALANCE:
+            msg = get_message(f'topped_to_min',user_data['lang']).format(INITIAL_DEMO_USD_BALANCE)
+            succ = await send_msg (user_id, msg)    
+            if (succ):
+                adding = INITIAL_DEMO_USD_BALANCE-user_data['balance']
+                add_money_action(user_id, ADMIN_ID, adding, f"admin manual top-up")
+                user_data['balance'] = INITIAL_DEMO_USD_BALANCE
+                save_user_data(user_data)
+                topped+=1
+                gifted += adding
+    
+    msg = get_message(f'topped_everyone','eng').format(topped, round(gifted,2))
+    succ = await send_msg (ADMIN_ID, msg)    
+    
+
+
+# In[48]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='send_stats')
@@ -874,7 +905,7 @@ async def stats_handler(call):
     succ = await send_msg (ADMIN_ID, msg)    
 
 
-# In[47]:
+# In[49]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='ban_users')
@@ -886,7 +917,7 @@ async def ban_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[48]:
+# In[50]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='un_ban_users')
@@ -898,7 +929,7 @@ async def ubnan_handler (call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[49]:
+# In[51]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:9] == 'checkout_')
@@ -910,7 +941,7 @@ async def checkout_handler(call):
     await send_invoice (user_id, tovar_id, method_id)
 
 
-# In[50]:
+# In[52]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:11] == 'crcheckout_')
@@ -922,7 +953,7 @@ async def crypto_checkout_handler(call):
     inv = await send_crypto_invoice (user_id, tovar_id, method_id)
 
 
-# In[51]:
+# In[53]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:10] == 'ipaidcryp_')
@@ -952,7 +983,7 @@ async def crypto_payment_verify(call):
         succ = await send_msg (user_id, msg)
 
 
-# In[52]:
+# In[54]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:9] == 'buy_item_')
@@ -974,13 +1005,22 @@ async def buy_handler(call):
         reply_markup.add(InlineKeyboardButton(text="-------",callback_data="aa"))
         for co in CRYPTO_PAYMENT_METHODS:
             reply_markup.add(InlineKeyboardButton(text=CRYPTO_PAYMENT_METHODS[co]['name'], callback_data=f'crcheckout_{tovar_num}_{co}'))
-        
-
-
+        reply_markup.add(InlineKeyboardButton(text="-------",callback_data="aa"))
+        reply_markup.add(InlineKeyboardButton(text="Binance transfer", callback_data=f'binance_transfer'))
     succ = await send_msg (user_id, msg, reply_markup=reply_markup)
 
 
-# In[53]:
+# In[55]:
+
+
+@dp.callback_query_handler(lambda x: x.data=='binance_transfer')
+async def binance_handler(call):
+    user_id = call.from_user.id
+    user_data = await get_user_data(user_id)
+    await send_binance_creds(user_id, user_data['lang'])
+
+
+# In[56]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:5] == 'gift_')
@@ -1005,7 +1045,7 @@ async def gift_handler(call):
     add_money_action(user_id, ADMIN_ID, amt, f"present: {tovary[tovar_id]['title']}")
 
 
-# In[54]:
+# In[57]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:5] == 'shop_')
@@ -1021,7 +1061,7 @@ async def checkout_handler(call):
     succ = await send_msg (user_id, text=desc, photo = tovar['image_url'], reply_markup=reply_markup)
 
 
-# In[55]:
+# In[58]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:6] == 'model_')
@@ -1042,7 +1082,7 @@ async def model_select_handler(call):
     succ = await send_msg (user_id, text=desc, photo = role['image_url'], reply_markup=reply_markup)    
 
 
-# In[56]:
+# In[59]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:9] == 'actmodel_')
@@ -1060,7 +1100,7 @@ async def model_choose_handler(call):
     succ = await send_msg (user_id, msg)
 
 
-# In[57]:
+# In[60]:
 
 
 @dp.callback_query_handler()
@@ -1072,7 +1112,7 @@ async def inline_callback_btn_click (call):
         
 
 
-# In[58]:
+# In[61]:
 
 
 @dp.pre_checkout_query_handler()
@@ -1081,7 +1121,7 @@ async def process_pre_checkout_query(pre_checkout_query: PreCheckoutQuery):
     
 
 
-# In[59]:
+# In[62]:
 
 
 @dp.my_chat_member_handler()
@@ -1132,7 +1172,7 @@ async def added_to_chat(chat_member: types.ChatMemberUpdated):
                     msg = get_message('i_am_admin','eng')
 
 
-# In[60]:
+# In[63]:
 
 
 async def ban_user(user_id, comment):
@@ -1144,7 +1184,7 @@ async def ban_user(user_id, comment):
     succ = await send_msg (user_id, msg)
 
 
-# In[61]:
+# In[64]:
 
 
 async def unban_user(user_id, comment):
@@ -1156,7 +1196,7 @@ async def unban_user(user_id, comment):
     succ = await send_msg (user_id, msg)
 
 
-# In[62]:
+# In[65]:
 
 
 async def send_gift_menu(giftuser):
@@ -1170,7 +1210,7 @@ async def send_gift_menu(giftuser):
     succ = await send_msg (ADMIN_ID, msg, reply_markup=reply_markup)
 
 
-# In[63]:
+# In[66]:
 
 
 @dp.message_handler(state=Form.give_user_money) # Принимаем состояние
@@ -1189,7 +1229,7 @@ async def gift_handler(message, state: FSMContext):
         succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[64]:
+# In[67]:
 
 
 @dp.message_handler(state=Form.ban_somebody) # Принимаем состояние
@@ -1210,7 +1250,7 @@ async def ban_user_handler(message, state: FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[65]:
+# In[68]:
 
 
 @dp.message_handler(state=Form.un_ban_somebody) # Принимаем состояние
@@ -1231,7 +1271,7 @@ async def un_ban_user_handle(message, state: FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[66]:
+# In[69]:
 
 
 @dp.message_handler(state=Form.state_set_curr_api_balance) # Принимаем состояние
@@ -1240,7 +1280,7 @@ async def got_curr_api_balance(message, state: FSMContext):
     await set_curr_api_balance(message.text)
 
 
-# In[67]:
+# In[70]:
 
 
 @dp.message_handler(commands='start')
@@ -1282,7 +1322,7 @@ async def start_message(message: types.Message):
                 await check_balance_warn()
 
 
-# In[68]:
+# In[71]:
 
 
 @dp.message_handler(content_types=['successful_payment'])
@@ -1309,7 +1349,7 @@ async def got_payment(message):
     succ = await send_msg (ADMIN_ID, adm_msg)
 
 
-# In[69]:
+# In[72]:
 
 
 @dp.message_handler(commands='my_ids')
@@ -1319,7 +1359,7 @@ async def send_ids(message: types.Message):
     succ = await send_msg (user_id, msg)
 
 
-# In[70]:
+# In[73]:
 
 
 @dp.message_handler(commands='menu')
@@ -1329,7 +1369,7 @@ async def send_user_menu_handler(message: types.Message):
     await send_user_menu(user_id, user_data['lang'])
 
 
-# In[71]:
+# In[74]:
 
 
 @dp.message_handler(commands='shop')
@@ -1341,7 +1381,7 @@ async def send_shop(message: types.Message):
     await send_shop_message(user_data)
 
 
-# In[72]:
+# In[75]:
 
 
 @dp.message_handler(commands='referal')
@@ -1353,7 +1393,7 @@ async def send_reflink(message: types.Message):
     succ = await send_msg (user_id, msg)
 
 
-# In[73]:
+# In[76]:
 
 
 @dp.message_handler(state=Form.vision_mode) # Принимаем состояние
@@ -1412,7 +1452,7 @@ async def process_vision_request(message, state: FSMContext):
         await check_balance_warn()
 
 
-# In[74]:
+# In[77]:
 
 
 @dp.message_handler(state=Form.broadcast_chats) # Принимаем состояние
@@ -1426,7 +1466,7 @@ async def broadcast_chats_handler(message, state: FSMContext):
     succ2 = await send_msg (ADMIN_ID, f"Broadcast FINISHED for {succ} CHATS")
 
 
-# In[75]:
+# In[78]:
 
 
 @dp.message_handler(state=Form.broadcast_users) # Принимаем состояние
@@ -1441,7 +1481,7 @@ async def broadcast_users_handler(message, state: FSMContext):
     succ2 = await send_msg (ADMIN_ID, f"Broadcast FINISHED for {succ} USERS")
 
 
-# In[76]:
+# In[79]:
 
 
 @dp.message_handler(state=Form.set_eur_rate) # Принимаем состояние
@@ -1456,7 +1496,7 @@ async def get_eur_rate(message, state: FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[77]:
+# In[80]:
 
 
 @dp.message_handler(state=Form.set_rub_rate) # Принимаем состояние
@@ -1471,7 +1511,7 @@ async def get_rub_rate(message, state: FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[78]:
+# In[81]:
 
 
 def should_bot_answer(message, chat_data, owner_data, req_text):
@@ -1518,7 +1558,7 @@ def should_bot_answer(message, chat_data, owner_data, req_text):
         # каждый N-й пост нужно комментить (без контеста)
 
 
-# In[79]:
+# In[82]:
 
 
 @dp.message_handler(content_types='any')
