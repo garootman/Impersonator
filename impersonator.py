@@ -1,4 +1,5 @@
 
+
 import json
 import asyncio
 from datetime import datetime, timedelta
@@ -15,6 +16,12 @@ from ai_tg_bot import *
 # In[3]:
 
 
+from crypto_payments import *
+
+
+# In[4]:
+
+
 class Form (StatesGroup):
     broadcast_users = State() # Задаем состояние
     broadcast_chats = State() # Задаем состояние
@@ -27,7 +34,7 @@ class Form (StatesGroup):
     give_user_money = State()
 
 
-# In[4]:
+# In[5]:
 
 
 def get_role_models():
@@ -37,7 +44,7 @@ def get_role_models():
     return role_models
 
 
-# In[5]:
+# In[6]:
 
 
 # Create table for storing user data
@@ -60,6 +67,8 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS money_acions
 # Create table for chat history
 cursor.execute('''CREATE TABLE IF NOT EXISTS chat_history
                   (chat_id INTEGER, user_id INTEGER, role_id INTEGER, message TEXT, tokens INTEGER, timestamp DATETIME)''')
+
+
 conn.commit()    
 
 #cursor.execute("PRAGMA table_info(chat_data)")
@@ -73,7 +82,7 @@ conn.commit()
 #cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
 #tables = cursor.fetchall()
 #print(tables)
-# In[6]:
+# In[7]:
 
 
 async def send_msg (chat_id, text, photo = None, reply_markup=None, reply_to_message_id = None, note_admin = False):
@@ -125,7 +134,51 @@ async def send_msg (chat_id, text, photo = None, reply_markup=None, reply_to_mes
         return False
 
 
-# In[7]:
+# In[8]:
+
+
+async def send_crypto_invoice (chat_id, tovar_id, method_id):
+    try:
+        user_data = await get_user_data(chat_id)
+        reply_markup = InlineKeyboardMarkup()
+        tovary = get_tovary()
+        tovar = tovary[tovar_id]
+        method = CRYPTO_PAYMENT_METHODS[method_id]
+        title = tovar['title']
+        order_id = f"{chat_id}_{tovar_id}_{str(random.random())[2:5]}"
+        order_description = (f"User: {user_data['name']} ({user_data['user_id']}) \nTovar: {tovar['title']} ({tovar['amount']} USD)")
+        cr_invoice = payment.create_payment(price_amount=tovar['price']/100, 
+                                            price_currency='USD', 
+                                            pay_currency=method['currency'],
+                                           order_id = order_id,
+                                            order_description = order_description,
+                                           )
+        await asyncio.sleep(0.1)
+        cr_invoice = payment.get_payment_status(cr_invoice['payment_id'])
+        msg = get_message('top_up_crypto', user_data['lang']).format(cr_invoice['pay_amount'], cr_invoice['pay_currency'].upper(), cr_invoice['pay_address'])
+
+        check_button = InlineKeyboardButton(text="💹 Done!", callback_data=f"ipaidcryp_{cr_invoice['payment_id']}")
+        reply_markup.add(check_button)
+
+        
+        await send_msg(chat_id, msg,reply_markup = reply_markup, note_admin=True)
+
+        ## ADD LINE TO DB
+        return cr_invoice
+    
+    except Exception as e:
+        print (f"Could NOT send Crypto payment: {str(e)}")
+        return {}
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[9]:
 
 
 async def send_invoice (chat_id, tovar_id, method_id):
@@ -153,7 +206,7 @@ async def send_invoice (chat_id, tovar_id, method_id):
     )
 
 
-# In[8]:
+# In[10]:
 
 
 async def check_subscriptions(user_id):
@@ -176,7 +229,7 @@ async def check_subscriptions(user_id):
     return subbed, status
 
 
-# In[9]:
+# In[11]:
 
 
 async def send_unsub_message(user_id, user_data, send_true = False):
@@ -211,7 +264,7 @@ async def send_unsub_message(user_id, user_data, send_true = False):
     return status
 
 
-# In[10]:
+# In[12]:
 
 
 async def check_balance_warn():
@@ -223,7 +276,7 @@ async def check_balance_warn():
         noted_of_money_shortage = True
 
 
-# In[11]:
+# In[13]:
 
 
 async def get_user_data(user_id):
@@ -265,7 +318,7 @@ async def get_user_data(user_id):
     return user_data
 
 
-# In[12]:
+# In[14]:
 
 
 def log_message_history(chat_id, user_id, role_id, message, tokens, timestamp):
@@ -275,7 +328,7 @@ def log_message_history(chat_id, user_id, role_id, message, tokens, timestamp):
     print (f"Logged {chat_id}: {message}")
 
 
-# In[13]:
+# In[15]:
 
 
 def get_context(chat_id, role_id):
@@ -291,7 +344,7 @@ def get_context(chat_id, role_id):
     return context
 
 
-# In[14]:
+# In[16]:
 
 
 def add_money_action(user_id, chat_id, amount, desc):
@@ -302,7 +355,7 @@ def add_money_action(user_id, chat_id, amount, desc):
     print (f"Added transaction: user {user_id}, chat {chat_id}, {minus}{round(amount,8)} USD: {desc}")
 
 
-# In[15]:
+# In[17]:
 
 
 #def save_user_data(user_id, language , banned, ban_comment,subscribed, balance, sub_checked=None):
@@ -315,7 +368,7 @@ def save_user_data(user_data, sub_checked=None):
     conn.commit()    
 
 
-# In[16]:
+# In[18]:
 
 
 async def get_chat_data (chat_id, owner_id=None):
@@ -348,7 +401,7 @@ async def get_chat_data (chat_id, owner_id=None):
     return cd
 
 
-# In[17]:
+# In[19]:
 
 
 def upd_chat_counter(chat_id, skipped):
@@ -357,7 +410,7 @@ def upd_chat_counter(chat_id, skipped):
     print (f"Counter skip {chat_id}: {skipped}")
 
 
-# In[18]:
+# In[20]:
 
 
 def get_stat_msg (stats):
@@ -377,7 +430,7 @@ def get_stat_msg (stats):
     return msg.strip()
 
 
-# In[19]:
+# In[21]:
 
 
 def get_first_message_date():
@@ -390,7 +443,7 @@ def get_first_message_date():
     return minmess
 
 
-# In[20]:
+# In[22]:
 
 
 def get_statistics():
@@ -434,7 +487,7 @@ def get_statistics():
     return ret_dict
 
 
-# In[21]:
+# In[23]:
 
 
 def check_add_referal (host_id, guest_id):
@@ -465,7 +518,7 @@ def check_add_referal (host_id, guest_id):
     
 
 
-# In[22]:
+# In[24]:
 
 
 def get_all_users_from_db():
@@ -474,7 +527,7 @@ def get_all_users_from_db():
     return {i['user_id']:i['name'] for i in user_data}
 
 
-# In[23]:
+# In[25]:
 
 
 def get_all_grout_chats_from_db():
@@ -483,7 +536,7 @@ def get_all_grout_chats_from_db():
     return {i['chat_id']:i['title'] for i in user_data}
 
 
-# In[24]:
+# In[26]:
 
 
 def get_users_chats(owner_id):
@@ -492,7 +545,7 @@ def get_users_chats(owner_id):
     return userchats
 
 
-# In[25]:
+# In[27]:
 
 
 def get_banned_users():
@@ -501,7 +554,7 @@ def get_banned_users():
     return {i['user_id']:i['name'] for i in user_data}
 
 
-# In[26]:
+# In[28]:
 
 
 async def send_user_menu(user_id, lang):
@@ -531,6 +584,11 @@ async def send_user_menu(user_id, lang):
             reply_markup.row(InlineKeyboardButton("🖼 Vision", callback_data='get_vision'))
 #        reply_markup.row(InlineKeyboardButton("📜 Context", callback_data='get_context'), 
 #                         InlineKeyboardButton("🧹 Clear", callback_data='clear_context'),)
+        if (USE_CONTACT_ADMIN):
+            admin_chat = await bot.get_chat(ADMIN_ID)
+            admin_url = admin_chat.user_url
+            reply_markup.row(InlineKeyboardButton("🆘 Contact Admin", url=admin_url))
+
     elif lang == 'rus':
         if (USE_ROLE_MODELS):
             reply_markup.row(InlineKeyboardButton("💬 Группы", callback_data='my_chats'))
@@ -542,11 +600,29 @@ async def send_user_menu(user_id, lang):
             reply_markup.row(InlineKeyboardButton("🖼 Видение", callback_data='get_vision'))
 #        reply_markup.row(InlineKeyboardButton("📜 Контекст", callback_data='get_context'), 
 #                         InlineKeyboardButton("🧹 Очистка", callback_data='clear_context'),)
+        if (USE_CONTACT_ADMIN):
+            admin_chat = await bot.get_chat(ADMIN_ID)
+            admin_url = admin_chat.user_url
+            reply_markup.row(InlineKeyboardButton("🆘 Написать Админу", url=admin_url))
+
+
 
     succ = await send_msg (user_id, msg, reply_markup=reply_markup)
 
 
-# In[27]:
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[29]:
 
 
 async def send_admin_menu(user_id):
@@ -573,7 +649,7 @@ async def send_admin_menu(user_id):
     succ = await send_msg (ADMIN_ID, msg, reply_markup=reply_markup)
 
 
-# In[28]:
+# In[30]:
 
 
 async def send_shop_message(user_data):
@@ -586,7 +662,7 @@ async def send_shop_message(user_data):
     succ = await send_msg (user_data['user_id'], msg, reply_markup=reply_markup)
 
 
-# In[29]:
+# In[31]:
 
 
 async def set_curr_api_balance(message):
@@ -602,7 +678,7 @@ async def set_curr_api_balance(message):
         succ = await send_msg (ADMIN_ID, f"Could NOT write current USD balance due to error {str(e)}")
 
 
-# In[30]:
+# In[32]:
 
 
 @dp.callback_query_handler(lambda x: x.data in ['eng', 'rus'])
@@ -616,7 +692,7 @@ async def lang_select_handler(call):
     await send_user_menu(user_id, user_data['lang'])
 
 
-# In[31]:
+# In[33]:
 
 
 @dp.callback_query_handler(lambda x: x.data == 'give_user_money')
@@ -630,7 +706,7 @@ async def give_user_some_money_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[32]:
+# In[34]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='my_chats')
@@ -654,7 +730,7 @@ async def my_chats_handler(call):
     succ = await send_msg (user_id, msg, reply_markup=reply_markup)
 
 
-# In[33]:
+# In[35]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:8] =='setchat_')
@@ -671,7 +747,7 @@ async def my_chats_handler(call):
     succ = await send_msg (user_id, msg, reply_markup = reply_markup)
 
 
-# In[34]:
+# In[36]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='get_vision')
@@ -687,7 +763,7 @@ async def vision_start_handler(call, state:FSMContext):
     succ = await send_msg (user_id, msg)
 
 
-# In[35]:
+# In[37]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='rate_eur')
@@ -697,7 +773,7 @@ async def rate_eur_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[36]:
+# In[38]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='rate_rub')
@@ -707,7 +783,7 @@ async def rate_rub_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[37]:
+# In[39]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='user_balance')
@@ -718,7 +794,7 @@ async def balance_handler(call):
     succ = await send_msg (user_id, msg)
 
 
-# In[38]:
+# In[40]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='show_shop')
@@ -728,7 +804,7 @@ async def show_shop_handler(call):
     await send_shop_message(user_data)
 
 
-# In[39]:
+# In[41]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='get_reflink')
@@ -740,7 +816,7 @@ async def reflink_handler(call):
     succ = await send_msg (user_id, msg)
 
 
-# In[40]:
+# In[42]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='check')
@@ -752,7 +828,7 @@ async def check_handler(call):
     await send_unsub_message(user_id, user_data, send_true = True)
 
 
-# In[41]:
+# In[43]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='broadcast_users')
@@ -762,7 +838,7 @@ async def broadcast_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[42]:
+# In[44]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='broadcast_chats')
@@ -776,7 +852,7 @@ async def broadcast_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[43]:
+# In[45]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='set_curr_api_balance')
@@ -788,7 +864,7 @@ async def set_curr_api_balance_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)    
 
 
-# In[44]:
+# In[46]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='send_stats')
@@ -798,7 +874,7 @@ async def stats_handler(call):
     succ = await send_msg (ADMIN_ID, msg)    
 
 
-# In[45]:
+# In[47]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='ban_users')
@@ -810,7 +886,7 @@ async def ban_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[46]:
+# In[48]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='un_ban_users')
@@ -822,7 +898,7 @@ async def ubnan_handler (call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[47]:
+# In[49]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:9] == 'checkout_')
@@ -834,7 +910,49 @@ async def checkout_handler(call):
     await send_invoice (user_id, tovar_id, method_id)
 
 
-# In[48]:
+# In[50]:
+
+
+@dp.callback_query_handler(lambda x: x.data[:11] == 'crcheckout_')
+async def crypto_checkout_handler(call):
+    user_id = call.from_user.id
+    user_data = await get_user_data(user_id)
+    tovar_id = int(call.data.split("_")[1])
+    method_id = int(call.data.split("_")[2])
+    inv = await send_crypto_invoice (user_id, tovar_id, method_id)
+
+
+# In[51]:
+
+
+@dp.callback_query_handler(lambda x: x.data[:10] == 'ipaidcryp_')
+async def crypto_payment_verify(call):
+    user_id = call.from_user.id
+    user_data = await get_user_data(user_id)
+    payment_id = int(call.data.split("_")[1])    
+    cr_invoice = payment.get_payment_status(payment_id)
+    tovary = get_tovary()
+    tovar = tovary[int(cr_invoice['order_id'].split('_')[1])]
+    if cr_invoice['payment_status'].lower() == 'finished':
+        # начислить денег
+        user_data['balance'] += tovar['amount']
+        save_user_data(user_data)
+        # написать юзеру чмоке
+        msg = get_message('account_added', user_data['lang']).format(tovar['amount'], user_data['balance'])    
+        succ = await send_msg (user_id, msg)
+        print (f"Got payment:\n{cr_invoice}")
+        # написать админу радостную весть
+        userinfo = f"{message.from_user.first_name} {message.from_user.last_name} (@{message.from_user.username}, id {message.from_user.id})"
+        adm_msg = get_message('admin_notify_account_added','eng').format(userinfo, tovar['amount'])
+        succ = await send_msg (ADMIN_ID, adm_msg)
+        # записи в бд по платежам
+        add_money_action(user_id, user_id, tovar['amount'], f'Crypto payment: {str(cr_invoice)}')
+    else:
+        msg = get_message('crypto_not_paid',user_data['lang'])
+        succ = await send_msg (user_id, msg)
+
+
+# In[52]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:9] == 'buy_item_')
@@ -851,10 +969,18 @@ async def buy_handler(call):
     msg = get_message('choose_payment_method', user_data['lang'])
     for po in payment_types:
         reply_markup.add(InlineKeyboardButton(text=payment_types[po]['name'], callback_data=f'checkout_{tovar_num}_{po}'))
+        
+    if (CRYPTO_PAYMENT_METHODS):
+        reply_markup.add(InlineKeyboardButton(text="-------",callback_data="aa"))
+        for co in CRYPTO_PAYMENT_METHODS:
+            reply_markup.add(InlineKeyboardButton(text=CRYPTO_PAYMENT_METHODS[co]['name'], callback_data=f'crcheckout_{tovar_num}_{co}'))
+        
+
+
     succ = await send_msg (user_id, msg, reply_markup=reply_markup)
 
 
-# In[49]:
+# In[53]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:5] == 'gift_')
@@ -879,7 +1005,7 @@ async def gift_handler(call):
     add_money_action(user_id, ADMIN_ID, amt, f"present: {tovary[tovar_id]['title']}")
 
 
-# In[50]:
+# In[54]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:5] == 'shop_')
@@ -895,7 +1021,7 @@ async def checkout_handler(call):
     succ = await send_msg (user_id, text=desc, photo = tovar['image_url'], reply_markup=reply_markup)
 
 
-# In[51]:
+# In[55]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:6] == 'model_')
@@ -916,7 +1042,7 @@ async def model_select_handler(call):
     succ = await send_msg (user_id, text=desc, photo = role['image_url'], reply_markup=reply_markup)    
 
 
-# In[52]:
+# In[56]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:9] == 'actmodel_')
@@ -934,7 +1060,7 @@ async def model_choose_handler(call):
     succ = await send_msg (user_id, msg)
 
 
-# In[53]:
+# In[57]:
 
 
 @dp.callback_query_handler()
@@ -946,7 +1072,7 @@ async def inline_callback_btn_click (call):
         
 
 
-# In[54]:
+# In[58]:
 
 
 @dp.pre_checkout_query_handler()
@@ -955,7 +1081,7 @@ async def process_pre_checkout_query(pre_checkout_query: PreCheckoutQuery):
     
 
 
-# In[55]:
+# In[59]:
 
 
 @dp.my_chat_member_handler()
@@ -1006,7 +1132,7 @@ async def added_to_chat(chat_member: types.ChatMemberUpdated):
                     msg = get_message('i_am_admin','eng')
 
 
-# In[56]:
+# In[60]:
 
 
 async def ban_user(user_id, comment):
@@ -1018,7 +1144,7 @@ async def ban_user(user_id, comment):
     succ = await send_msg (user_id, msg)
 
 
-# In[57]:
+# In[61]:
 
 
 async def unban_user(user_id, comment):
@@ -1030,7 +1156,7 @@ async def unban_user(user_id, comment):
     succ = await send_msg (user_id, msg)
 
 
-# In[58]:
+# In[62]:
 
 
 async def send_gift_menu(giftuser):
@@ -1044,7 +1170,7 @@ async def send_gift_menu(giftuser):
     succ = await send_msg (ADMIN_ID, msg, reply_markup=reply_markup)
 
 
-# In[59]:
+# In[63]:
 
 
 @dp.message_handler(state=Form.give_user_money) # Принимаем состояние
@@ -1063,7 +1189,7 @@ async def gift_handler(message, state: FSMContext):
         succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[60]:
+# In[64]:
 
 
 @dp.message_handler(state=Form.ban_somebody) # Принимаем состояние
@@ -1084,7 +1210,7 @@ async def ban_user_handler(message, state: FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[61]:
+# In[65]:
 
 
 @dp.message_handler(state=Form.un_ban_somebody) # Принимаем состояние
@@ -1105,7 +1231,7 @@ async def un_ban_user_handle(message, state: FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[62]:
+# In[66]:
 
 
 @dp.message_handler(state=Form.state_set_curr_api_balance) # Принимаем состояние
@@ -1114,7 +1240,7 @@ async def got_curr_api_balance(message, state: FSMContext):
     await set_curr_api_balance(message.text)
 
 
-# In[63]:
+# In[67]:
 
 
 @dp.message_handler(commands='start')
@@ -1156,7 +1282,7 @@ async def start_message(message: types.Message):
                 await check_balance_warn()
 
 
-# In[64]:
+# In[68]:
 
 
 @dp.message_handler(content_types=['successful_payment'])
@@ -1167,7 +1293,7 @@ async def got_payment(message):
     tovary = get_tovary()
     tovar = tovary[int(pmnt['invoice_payload'].split('_')[1])]
     user_data['balance'] += tovar['amount']
-    msg = get_message('account_added', 'eng').format(tovar['amount'], user_data['balance'])    
+    msg = get_message('account_added', user_data['lang']).format(tovar['amount'], user_data['balance'])    
     succ = await send_msg (message.chat.id, msg)
 
     print (f"Got payment:\n{pmnt}")
@@ -1183,7 +1309,7 @@ async def got_payment(message):
     succ = await send_msg (ADMIN_ID, adm_msg)
 
 
-# In[65]:
+# In[69]:
 
 
 @dp.message_handler(commands='my_ids')
@@ -1193,7 +1319,7 @@ async def send_ids(message: types.Message):
     succ = await send_msg (user_id, msg)
 
 
-# In[66]:
+# In[70]:
 
 
 @dp.message_handler(commands='menu')
@@ -1203,7 +1329,7 @@ async def send_user_menu_handler(message: types.Message):
     await send_user_menu(user_id, user_data['lang'])
 
 
-# In[67]:
+# In[71]:
 
 
 @dp.message_handler(commands='shop')
@@ -1215,7 +1341,7 @@ async def send_shop(message: types.Message):
     await send_shop_message(user_data)
 
 
-# In[68]:
+# In[72]:
 
 
 @dp.message_handler(commands='referal')
@@ -1227,7 +1353,7 @@ async def send_reflink(message: types.Message):
     succ = await send_msg (user_id, msg)
 
 
-# In[69]:
+# In[73]:
 
 
 @dp.message_handler(state=Form.vision_mode) # Принимаем состояние
@@ -1286,7 +1412,7 @@ async def process_vision_request(message, state: FSMContext):
         await check_balance_warn()
 
 
-# In[70]:
+# In[74]:
 
 
 @dp.message_handler(state=Form.broadcast_chats) # Принимаем состояние
@@ -1300,7 +1426,7 @@ async def broadcast_chats_handler(message, state: FSMContext):
     succ2 = await send_msg (ADMIN_ID, f"Broadcast FINISHED for {succ} CHATS")
 
 
-# In[71]:
+# In[75]:
 
 
 @dp.message_handler(state=Form.broadcast_users) # Принимаем состояние
@@ -1315,7 +1441,7 @@ async def broadcast_users_handler(message, state: FSMContext):
     succ2 = await send_msg (ADMIN_ID, f"Broadcast FINISHED for {succ} USERS")
 
 
-# In[72]:
+# In[76]:
 
 
 @dp.message_handler(state=Form.set_eur_rate) # Принимаем состояние
@@ -1330,7 +1456,7 @@ async def get_eur_rate(message, state: FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[73]:
+# In[77]:
 
 
 @dp.message_handler(state=Form.set_rub_rate) # Принимаем состояние
@@ -1345,7 +1471,7 @@ async def get_rub_rate(message, state: FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[74]:
+# In[78]:
 
 
 def should_bot_answer(message, chat_data, owner_data, req_text):
@@ -1392,7 +1518,7 @@ def should_bot_answer(message, chat_data, owner_data, req_text):
         # каждый N-й пост нужно комментить (без контеста)
 
 
-# In[75]:
+# In[79]:
 
 
 @dp.message_handler(content_types='any')
@@ -1494,3 +1620,4 @@ if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
 # ====== END =====
 # In[ ]:
+

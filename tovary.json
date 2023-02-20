@@ -1,1 +1,27 @@
-{"1": {"title": "+5 USD", "price": 500, "amount": 5, "active": true, "description": "Add 10 USD to your bot balance, to spend with AI (no discount)", "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1068640112314945616/tovar_5.jpg", "img_size": 512}, "3": {"title": "+11 USD (10% off)", "price": 1000, "amount": 11, "active": true, "description": "Add 11 USD to your bot balance, to spend with AI. 10% discount!", "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1068640112554029197/tovar_10.jpg", "img_size": 512}, "5": {"title": "+25 USD (25% off)", "price": 2000, "amount": 25, "active": true, "description": "Add 25 USD to your bot balance, to spend with AI, 25% discount!", "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1068640112856027176/tovar_25.jpg", "img_size": 512}, "7": {"title": "+100 USD (50% off)", "price": 5000, "amount": 100, "active": true, "description": "Add 100 USD to your bot balance, to spend with AI, 50% discount!", "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1068640112042332161/tovar_100.jpg", "img_size": 512}, "9": {"title": "+200 USD (65% off)", "price": 95, "amount": 200, "active": false, "description": "Add 200 USD to your bot balance, to spend with AI, 65% discount!", "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1068640112042332161/tovar_100.jpg", "img_size": 512}}
+{
+    "1": {"title": "+5 USD (no discount)", "price": 500, "amount": 5, "active": false, 
+          "description": "Add 10 USD to your bot balance, to spend with AI (no discount)", 
+          "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1068640112314945616/tovar_5.jpg", 
+          "img_size": 512}, 
+    
+    "3": {"title": "+10 USD (no discount)", "price": 1000, "amount": 10, "active": true, 
+          "description": "Add 10 USD to your bot balance, to spend with AI", 
+          "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1077039028047712266/bot_10usd.png", 
+          "img_size": 512}, 
+    
+    "5": {"title": "+25 USD (25% off)", "price": 2000, "amount": 25, "active": true, 
+          "description": "Add 25 USD to your bot balance, to spend with AI, 25% discount!", 
+          "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1077039028290990091/bot_25usd.png", 
+          "img_size": 512}, 
+    
+    "7": {"title": "+65 USD (30% off)", "price": 5000, "amount": 65, "active": true, 
+          "description": "Add 65 USD to your bot balance, to spend with AI, 30% discount!", 
+          "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1077039028488118383/bot_65usd.png", 
+          "img_size": 512}, 
+    
+    "9": {"title": "+140 USD (40% off)", "price": 10000, "amount":140, "active": true, 
+          "description": "Add 140 USD to your bot balance, to spend with AI, 40% discount!", 
+          "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1077039028748161094/bot_140usd.png", 
+          "img_size": 512}
+
+}

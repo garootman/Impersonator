@@ -1,6 +1,7 @@
 # ACCESSES
 openai_key="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"
 TG_TOKEN = "5566311336:AAEXq-Q_yLncQwyMaFuI463h6-7fGPDak5Q"
+NOWPAYMENTS_KEY = "87Y9HHA-GEZ4TB9-HA1S789-JXBWMTS" # PROD
 ADMIN_ID = 62408647               # тот у кого будет доступ к админ-командам
 
 
@@ -10,6 +11,7 @@ USE_SHOP = True
 USE_VISION = True
 USE_BALANCE_MONEY = True
 USE_TRANSLATE_TO_ENG = True
+USE_CONTACT_ADMIN = True
 
 CHAT_ANSWER_FREQUENCY = 2 # как часто отвечать в групповых чатах, сколько сообщений пропускать.
 CHANNEL_ANSWER_FREQUENCY = 2 # как часто писать ответы на посты в каналах
@@ -27,12 +29,22 @@ TARIF_MODIFICATOR = 2.0
 
 # PAYMENTS!
 PAYMENT_METHODS = {
-    1:{'name':"Stripe TEST 🌍", 'currency':'EUR', 'token':"1284685063:TEST:ODAwMzIwM2NlMWU3"},
-    2:{'name':"TEST Bank 131 🤑", 'currency':'RUB','token':"1842663557:TEST:d3e7464425e583f03684835138f434418e57c312"},
-    3:{'name':"TEST PSB ❤️", 'currency':'RUB','token':"1832575495:TEST:9b2e724d1c672cdaa2ec0418f1732a9bb12991769134eadd23bf7145c9ea391f"},
+#    1:{'name':"Stripe TEST 🌍", 'currency':'EUR', 'token':"1284685063:TEST:ODAwMzIwM2NlMWU3"},
+#    2:{'name':"TEST Bank 131 🤑", 'currency':'RUB','token':"1842663557:TEST:d3e7464425e583f03684835138f434418e57c312"},
+#    3:{'name':"TEST PSB ❤️", 'currency':'RUB','token':"1832575495:TEST:9b2e724d1c672cdaa2ec0418f1732a9bb12991769134eadd23bf7145c9ea391f"},
+
     99:{'name':"Ю.Касса TEST valkli 🇷🇺", 'currency':'USD','token':"381764678:TEST:49221"},
 }
-# 99 - это тестовый тип платежа, будет только у админа.
+#99 - это тестовый тип платежа, будет только у админа.
+
+CRYPTO_PAYMENT_METHODS = {
+    20:{'name':'USDT TRC20 TRX', 'currency':'usdttrc20'}, 
+    21:{'name':'Ethereum ETH', 'currency':'eth'}, 
+    22:{'name':'USDT Binance BSC', 'currency':'usdtbsc'}, 
+    23:{'name':'Ripple XRP', 'currency':'xrp'}, 
+    
+    
+                         }
 
 
 
