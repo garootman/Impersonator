@@ -44,8 +44,6 @@ CRYPTO_PAYMENT_METHODS = {
     21:{'name':'Ethereum ETH', 'currency':'eth'}, 
     22:{'name':'USDT Binance BSC', 'currency':'usdtbsc'}, 
     23:{'name':'Ripple XRP', 'currency':'xrp'}, 
-    
-    
                          }
 
 

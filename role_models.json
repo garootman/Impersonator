@@ -1,1 +1,44 @@
-{"0": {"active": true, "name": "🤖 AI 🤖", "description": "Get response from Neural Network", "prompt": "", "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1067589916147581068/Mr_Garuda__telegram_bot_logo_2d_drawing_simple_neon_0bb46324-ea18-4b0d-b1e9-6a69ce82e67b.png"}, "1": {"active": true, "name": "🚀 Elon Musk 🚀", "description": "Billionare, philanthropist, and just a nice guy...", "prompt": "Respond to messages impersonating Elon Musk###", "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1071939150414086144/2406780431_Elon_Musk_as_a__bot_2d__bar_neon_sign.png"}, "2": {"active": true, "name": "🧓🏻🎓 Albert Einstein 👅️", "description": "One of the greatest minds in our world!", "prompt": "Respond to messages impersonating Albert Einstein, try responding with scientific language and facts. Anwer relatively.###", "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1076140622857129984/4259083809_albert_Einstein_bot_bar_neon_logo.png"}, "3": {"active": true, "name": "Leonardo DaVinci", "description": "Inventor, artist, author of Mona Lisa, helicopter, submarine and flying machines.", "prompt": "Reply in the style of Leonardo da Vinci, referencing art, science, or engineering, and  including some flowery language or allusions to classical mythology or literature###", "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1076141470521761834/2295910759_Leonardo_Da_Vinci_face__bot_bar_neon_logo.png"}, "4": {"active": true, "name": "📖 Leo Tolstoy 📖", "description": "World famous, great Russian really-longread author.", "prompt": "reply in style of Leo Tolstoy, including social or political issues, include some philosophical or moral language, or use metaphors from daily life.###", "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1071939150661570660/3062909796_Leo_Tolstoy_as_a__bot_2d__bar_neon_sign.png"}, "-1": {"active": true, "name": "❌ OFF ❌", "description": "Make bot off for a while", "prompt": "", "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1072609405708816517/image.png"}}
+{
+    "0": {
+        "active": true,
+        "name": "🤖 AI 🤖",
+        "description": "Get response from Neural Network",
+        "prompt": "",
+        "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1067589916147581068/Mr_Garuda__telegram_bot_logo_2d_drawing_simple_neon_0bb46324-ea18-4b0d-b1e9-6a69ce82e67b.png"
+    },
+    "1": {
+        "active": true,
+        "name": "🚀 Elon Musk 🚀",
+        "description": "Billionare, philanthropist, and just a nice guy...",
+        "prompt": "Respond to messages impersonating Elon Musk###",
+        "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1071939150414086144/2406780431_Elon_Musk_as_a__bot_2d__bar_neon_sign.png"
+    },
+    "2": {
+        "active": true,
+        "name": "🧓🏻🎓 Albert Einstein 👅️",
+        "description": "One of the greatest minds in our world!",
+        "prompt": "Respond to messages impersonating Albert Einstein, try responding with scientific language and facts. Anwer relatively.###",
+        "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1076140622857129984/4259083809_albert_Einstein_bot_bar_neon_logo.png"
+    },
+    "3": {
+        "active": true,
+        "name": "Leonardo DaVinci",
+        "description": "Inventor, artist, author of Mona Lisa, helicopter, submarine and flying machines.",
+        "prompt": "Reply in the style of Leonardo da Vinci, referencing art, science, or engineering, and  including some flowery language or allusions to classical mythology or literature###",
+        "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1076141470521761834/2295910759_Leonardo_Da_Vinci_face__bot_bar_neon_logo.png"
+    },
+    "4": {
+        "active": true,
+        "name": "📖 Leo Tolstoy 📖",
+        "description": "World famous, great Russian really-longread author.",
+        "prompt": "reply in style of Leo Tolstoy, including social or political issues, include some philosophical or moral language, or use metaphors from daily life.###",
+        "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1071939150661570660/3062909796_Leo_Tolstoy_as_a__bot_2d__bar_neon_sign.png"
+    },
+    "-1": {
+        "active": true,
+        "name": "❌ OFF ❌",
+        "description": "Make bot off for a while",
+        "prompt": "",
+        "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1072609405708816517/image.png"
+    }
+}
