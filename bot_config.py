@@ -15,6 +15,9 @@ USE_BALANCE_MONEY = True
 USE_TRANSLATE_TO_ENG = True
 USE_CONTACT_ADMIN = True
 
+#GROUP_LINK = "https://t.me/test0group01"
+GROUP_LINK = ""
+
 CHAT_ANSWER_FREQUENCY = 2 # как часто отвечать в групповых чатах, сколько сообщений пропускать.
 CHANNEL_ANSWER_FREQUENCY = 2 # как часто писать ответы на посты в каналах
 
@@ -82,3 +85,4 @@ OPENAI_BALANCE_FILE = 'balance.txt'
 GOOGLE_API_KEY_FILE = "./ai-with-radix-09328f41ef89.json"
 ROLE_MODELS_FILE = 'role_models.json'
 DB_FILE = "impersonator_bot_data.db"
+
