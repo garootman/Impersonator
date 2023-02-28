@@ -205,5 +205,9 @@
     },
     "topped_everyone": {
         "eng": "Finished topping up for {} users. Gave away {} USD total..."
+    },
+    "menu_title": {
+        "eng": "Menu: whom would you like to talk to?",
+        "rus": "Меню: c кем Вы хотели бы поговорить!?"
     }
 }

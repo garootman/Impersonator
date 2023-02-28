@@ -571,7 +571,8 @@ def get_banned_users():
 
 
 async def send_user_menu(user_id, lang):
-    msg = "Menu:"
+    
+    msg = get_message('menu_title', lang)
     reply_markup = InlineKeyboardMarkup()
 #    ["🖼 Vision","🖼 Видение"]
 #    ["💰 Balance","💰 Баланс"]
@@ -1672,6 +1673,5 @@ async def handle_message(message: types.Message):
 if __name__ == '__main__':
     print(f"Bot started!")
     executor.start_polling(dp, skip_updates=True)
-
-    
-    
+# ====== END =====
+# In[ ]:
