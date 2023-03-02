@@ -14,22 +14,34 @@ import random
 # In[2]:
 
 
-from ai_tg_bot import *
+from database_lib import *
 
 
 # In[3]:
 
 
-from crypto_payments import *
+from ai_tg_bot import *
 
 
 # In[4]:
 
 
-from google_services_api import *
+from openai_lib import *
 
 
 # In[5]:
+
+
+from crypto_payments import *
+
+
+# In[6]:
+
+
+from google_services_api import *
+
+
+# In[7]:
 
 
 class Form (StatesGroup):
@@ -44,7 +56,7 @@ class Form (StatesGroup):
     give_user_money = State()
 
 
-# In[6]:
+# In[8]:
 
 
 def get_role_models():
@@ -54,45 +66,17 @@ def get_role_models():
     return role_models
 
 
-# In[7]:
+# In[9]:
 
 
-# Create table for storing user data
-cursor.execute('''CREATE TABLE IF NOT EXISTS user_data
-                  (user_id INTEGER PRIMARY KEY, name TEXT, lang TEXT, balance REAL, banned INTEGER, subscribed INTEGER, ban_comment TEXT, subs_timestamp DATETIME)''')
-
-# Create table for referals
-cursor.execute('''CREATE TABLE IF NOT EXISTS referals
-                  (host_id INTEGER, guest_id INTEGER, timestamp DATETIME)''')
+def dump_all_chat_data_to_json():
+    cursor.execute('SELECT * FROM chat_data')
+    cd = cursor.fetchall()
+    with open (CHAT_DUMP_FILE,'w',encoding='utf8') as f:
+        json.dump(cd, f,ensure_ascii=False, indent=4)
 
 
-# Create table for user chats
-cursor.execute('''CREATE TABLE IF NOT EXISTS chat_data
-                  (chat_id INTEGER PRIMARY KEY, owner_id INTEGER, title TEXT,role_id INTEGER, skipped INTEGER, type TEXT)''')
-
-# Create table for balance data
-cursor.execute('''CREATE TABLE IF NOT EXISTS money_acions
-                  (user_id INTEGER, chat_id INTEGER, description TEXT, amount REAL, timestamp DATETIME)''')
-
-# Create table for chat history
-cursor.execute('''CREATE TABLE IF NOT EXISTS chat_history
-                  (chat_id INTEGER, user_id INTEGER, role_id INTEGER, message TEXT, tokens INTEGER, timestamp DATETIME)''')
-
-
-conn.commit()    
-
-#cursor.execute("PRAGMA table_info(chat_data)")
-#columns = [col['name'] for col in cursor.fetchall()]
-
-#if "last_sub_upd" not in columns:
-#    cursor.execute("ALTER TABLE user_data ADD COLUMN last_sub_upd DATETIME")
-#    cursor.execute("UPDATE user_data set last_sub_upd = ?", (datetime(2010,1,1),))
-#    conn.commit() 
-
-#cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-#tables = cursor.fetchall()
-#print(tables)
-# In[8]:
+# In[10]:
 
 
 async def send_msg (chat_id, text, photo = None, reply_markup=None, reply_to_message_id = None, note_admin = False):
@@ -144,7 +128,7 @@ async def send_msg (chat_id, text, photo = None, reply_markup=None, reply_to_mes
         return False
 
 
-# In[9]:
+# In[11]:
 
 
 async def send_crypto_invoice (chat_id, tovar_id, method_id):
@@ -182,7 +166,7 @@ async def send_crypto_invoice (chat_id, tovar_id, method_id):
 
 
 
-# In[10]:
+# In[12]:
 
 
 async def send_binance_creds(chat_id, lang):
@@ -190,7 +174,7 @@ async def send_binance_creds(chat_id, lang):
     await send_msg (chat_id, msg)
 
 
-# In[11]:
+# In[13]:
 
 
 async def send_invoice (chat_id, tovar_id, method_id):
@@ -218,7 +202,7 @@ async def send_invoice (chat_id, tovar_id, method_id):
     )
 
 
-# In[12]:
+# In[14]:
 
 
 async def check_subscriptions(user_id):
@@ -241,7 +225,7 @@ async def check_subscriptions(user_id):
     return subbed, status
 
 
-# In[13]:
+# In[15]:
 
 
 async def send_unsub_message(user_id, user_data, send_true = False):
@@ -276,7 +260,7 @@ async def send_unsub_message(user_id, user_data, send_true = False):
     return status
 
 
-# In[14]:
+# In[16]:
 
 
 async def check_balance_warn():
@@ -288,7 +272,7 @@ async def check_balance_warn():
         noted_of_money_shortage = True
 
 
-# In[15]:
+# In[17]:
 
 
 async def get_user_data(user_id):
@@ -330,7 +314,7 @@ async def get_user_data(user_id):
     return user_data
 
 
-# In[16]:
+# In[18]:
 
 
 def log_message_history(chat_id, user_id, role_id, message, tokens, timestamp):
@@ -340,23 +324,22 @@ def log_message_history(chat_id, user_id, role_id, message, tokens, timestamp):
     print (f"Logged {chat_id}: {message}")
 
 
-# In[17]:
+# In[19]:
 
 
-def get_context(chat_id, role_id):
+def get_context(chat_id, role_id, contlen=CONTEXT_LEN, mode='chat'):
 #    cursor.execute('SELECT * FROM chat_history WHERE user_id=?', (user_id,))
     cursor.execute('SELECT * FROM chat_history WHERE chat_id=? AND role_id=? and message NOT LIKE "image: %"', (chat_id, role_id,))
     role_hist = cursor.fetchall()   
-    role_hist = role_hist[-CONTEXT_LEN:]
-    context = []
-    for rec in role_hist:
-        context.append(rec['message'])
-        if rec['message']=='/clear':
-            context = []
-    return context
+    role_hist = role_hist[-contlen:]
+    if mode=='chat':
+        ret_data = [{'role':(('assistant') if (i['user_id']==me.id) else ('user')), 'content':i['message']} for i in role_hist]
+    else:
+        ret_data = [i['message'] for i in role_hist]
+    return ret_data
 
 
-# In[18]:
+# In[20]:
 
 
 def add_money_action(user_id, chat_id, amount, desc):
@@ -367,20 +350,27 @@ def add_money_action(user_id, chat_id, amount, desc):
     print (f"Added transaction: user {user_id}, chat {chat_id}, {minus}{round(amount,8)} USD: {desc}")
 
 
-# In[19]:
+# In[21]:
 
 
 #def save_user_data(user_id, language , banned, ban_comment,subscribed, balance, sub_checked=None):
 def save_user_data(user_data, sub_checked=None):
-    cursor.execute('UPDATE user_data SET lang=?, balance=?, banned=?, subscribed=?, ban_comment=? WHERE user_id=?', 
-                   (user_data['lang'],round(user_data['balance'],10),user_data['banned'], user_data['subscribed'], user_data['ban_comment'],  user_data['user_id']))
+    old_userdata = get_all_users_from_db().keys()
+    if (user_data['user_id'] in old_userdata):
+        cursor.execute('UPDATE user_data SET lang=?, balance=?, banned=?, subscribed=?, ban_comment=? WHERE user_id=?', 
+                       (user_data['lang'],round(user_data['balance'],10),user_data['banned'], user_data['subscribed'], user_data['ban_comment'],  user_data['user_id']))
+    else:
+        cursor.execute('INSERT INTO user_data (user_id, name, lang, balance, banned, subscribed, ban_comment, subs_timestamp) VALUES (?,?,?,?,?,?,?,?)'
+            ,(user_data['user_id'], 'some_user', 'eng', 0.01, user_data['banned'], True, user_data['ban_comment'], utc()))
+        conn.commit()   
+
     if sub_checked:
         cursor.execute('UPDATE user_data SET subs_timestamp=? WHERE user_id=?', (utc(), user_data['user_id']))
         print (f"Save sub {user_data['user_id']}: {user_data['subscribed']}")
     conn.commit()    
 
 
-# In[20]:
+# In[22]:
 
 
 async def get_chat_data (chat_id, owner_id=None):
@@ -413,7 +403,7 @@ async def get_chat_data (chat_id, owner_id=None):
     return cd
 
 
-# In[21]:
+# In[23]:
 
 
 def upd_chat_counter(chat_id, skipped):
@@ -422,7 +412,7 @@ def upd_chat_counter(chat_id, skipped):
     print (f"Counter skip {chat_id}: {skipped}")
 
 
-# In[22]:
+# In[24]:
 
 
 def get_stat_msg (stats):
@@ -442,7 +432,7 @@ def get_stat_msg (stats):
     return msg.strip()
 
 
-# In[23]:
+# In[25]:
 
 
 def get_first_message_date():
@@ -455,10 +445,11 @@ def get_first_message_date():
     return minmess
 
 
-# In[24]:
+# In[26]:
 
 
 def get_statistics():
+    
     cursor.execute('SELECT * FROM money_acions where description like "%payment%"')
     pay_data = cursor.fetchall()
     cursor.execute('SELECT * FROM referals')
@@ -499,7 +490,7 @@ def get_statistics():
     return ret_dict
 
 
-# In[25]:
+# In[27]:
 
 
 def check_add_referal (host_id, guest_id):
@@ -530,7 +521,7 @@ def check_add_referal (host_id, guest_id):
     
 
 
-# In[26]:
+# In[28]:
 
 
 def get_all_users_from_db():
@@ -540,7 +531,7 @@ def get_all_users_from_db():
     return {i['user_id']:i for i in user_data}
 
 
-# In[27]:
+# In[29]:
 
 
 def get_all_grout_chats_from_db():
@@ -549,7 +540,7 @@ def get_all_grout_chats_from_db():
     return {i['chat_id']:i['title'] for i in user_data}
 
 
-# In[28]:
+# In[30]:
 
 
 def get_users_chats(owner_id):
@@ -558,7 +549,7 @@ def get_users_chats(owner_id):
     return userchats
 
 
-# In[29]:
+# In[31]:
 
 
 def get_banned_users():
@@ -567,7 +558,7 @@ def get_banned_users():
     return {i['user_id']:i['name'] for i in user_data}
 
 
-# In[30]:
+# In[32]:
 
 
 async def send_user_menu(user_id, lang):
@@ -606,8 +597,6 @@ async def send_user_menu(user_id, lang):
             reply_markup.row(InlineKeyboardButton("🍖 Shop", callback_data='show_shop'))
         if (USE_VISION):
             reply_markup.row(InlineKeyboardButton("🖼 Generate Image", callback_data='get_vision'))
-#        reply_markup.row(InlineKeyboardButton("📜 Context", callback_data='get_context'), 
-#                         InlineKeyboardButton("🧹 Clear", callback_data='clear_context'),)
         if (USE_CONTACT_ADMIN):
             admin_chat = await bot.get_chat(ADMIN_ID)
             admin_url = admin_chat.user_url
@@ -620,8 +609,6 @@ async def send_user_menu(user_id, lang):
             reply_markup.row(InlineKeyboardButton("🍖 Магазин", callback_data='show_shop'))
         if (USE_VISION):
             reply_markup.row(InlineKeyboardButton("🖼 Сгенерировать картинку", callback_data='get_vision'))
-#        reply_markup.row(InlineKeyboardButton("📜 Контекст", callback_data='get_context'), 
-#                         InlineKeyboardButton("🧹 Очистка", callback_data='clear_context'),)
         if (USE_CONTACT_ADMIN):
             admin_chat = await bot.get_chat(ADMIN_ID)
             admin_url = admin_chat.user_url
@@ -632,19 +619,7 @@ async def send_user_menu(user_id, lang):
     succ = await send_msg (user_id, msg, reply_markup=reply_markup)
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[31]:
+# In[33]:
 
 
 async def send_admin_menu(user_id):
@@ -673,7 +648,7 @@ async def send_admin_menu(user_id):
     succ = await send_msg (ADMIN_ID, msg, reply_markup=reply_markup)
 
 
-# In[32]:
+# In[34]:
 
 
 async def send_shop_message(user_data):
@@ -686,7 +661,7 @@ async def send_shop_message(user_data):
     succ = await send_msg (user_data['user_id'], msg, reply_markup=reply_markup)
 
 
-# In[33]:
+# In[35]:
 
 
 async def set_curr_api_balance(message):
@@ -702,7 +677,7 @@ async def set_curr_api_balance(message):
         succ = await send_msg (ADMIN_ID, f"Could NOT write current USD balance due to error {str(e)}")
 
 
-# In[34]:
+# In[36]:
 
 
 @dp.callback_query_handler(lambda x: x.data in ['eng', 'rus'])
@@ -716,7 +691,7 @@ async def lang_select_handler(call):
     await send_user_menu(user_id, user_data['lang'])
 
 
-# In[35]:
+# In[37]:
 
 
 @dp.callback_query_handler(lambda x: x.data == 'give_user_money')
@@ -730,7 +705,7 @@ async def give_user_some_money_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[36]:
+# In[38]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='my_chats')
@@ -754,7 +729,7 @@ async def my_chats_handler(call):
     succ = await send_msg (user_id, msg, reply_markup=reply_markup)
 
 
-# In[37]:
+# In[39]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:8] =='setchat_')
@@ -771,7 +746,7 @@ async def my_chats_handler(call):
     succ = await send_msg (user_id, msg, reply_markup = reply_markup)
 
 
-# In[38]:
+# In[40]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='get_vision')
@@ -787,7 +762,7 @@ async def vision_start_handler(call, state:FSMContext):
     succ = await send_msg (user_id, msg)
 
 
-# In[39]:
+# In[41]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='rate_eur')
@@ -797,7 +772,7 @@ async def rate_eur_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[40]:
+# In[42]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='rate_rub')
@@ -807,7 +782,7 @@ async def rate_rub_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[41]:
+# In[43]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='user_balance')
@@ -818,7 +793,7 @@ async def balance_handler(call):
     succ = await send_msg (user_id, msg)
 
 
-# In[42]:
+# In[44]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='show_shop')
@@ -828,7 +803,7 @@ async def show_shop_handler(call):
     await send_shop_message(user_data)
 
 
-# In[43]:
+# In[45]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='get_reflink')
@@ -840,7 +815,7 @@ async def reflink_handler(call):
     succ = await send_msg (user_id, msg)
 
 
-# In[44]:
+# In[46]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='check')
@@ -852,7 +827,7 @@ async def check_handler(call):
     await send_unsub_message(user_id, user_data, send_true = True)
 
 
-# In[45]:
+# In[47]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='broadcast_users')
@@ -862,7 +837,7 @@ async def broadcast_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[46]:
+# In[48]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='broadcast_chats')
@@ -876,7 +851,7 @@ async def broadcast_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[47]:
+# In[49]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='set_curr_api_balance')
@@ -888,7 +863,7 @@ async def set_curr_api_balance_handler(call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)    
 
 
-# In[48]:
+# In[50]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='top_up_to_min')
@@ -915,7 +890,7 @@ async def stats_handler(call):
     
 
 
-# In[49]:
+# In[51]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='send_stats')
@@ -925,19 +900,22 @@ async def stats_handler(call):
     succ = await send_msg (ADMIN_ID, msg)    
 
 
-# In[50]:
+# In[52]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='ban_users')
 async def ban_handler(call, state:FSMContext):
     await state.set_state(Form.ban_somebody)
+    
+    dump_all_chat_data_to_json()
+    await bot.send_document(ADMIN_ID, InputFile(CHAT_DUMP_FILE))
     allusers = get_all_users_from_db()
-    userstr = '\n'.join([f"{allusers[i]}: {i}" for i in allusers if i not in get_banned_users()])#
-    msg = get_message('up_to_ban', 'eng').format(userstr)
+#    userstr = '\n'.join([f"{allusers[i]}: {i}" for i in allusers if i not in get_banned_users()])#
+    msg = get_message('up_to_ban', 'eng')#.format(userstr)
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[51]:
+# In[53]:
 
 
 @dp.callback_query_handler(lambda x: x.data =='un_ban_users')
@@ -949,7 +927,7 @@ async def ubnan_handler (call, state:FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[52]:
+# In[54]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:9] == 'checkout_')
@@ -961,7 +939,7 @@ async def checkout_handler(call):
     await send_invoice (user_id, tovar_id, method_id)
 
 
-# In[53]:
+# In[55]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:11] == 'crcheckout_')
@@ -973,7 +951,7 @@ async def crypto_checkout_handler(call):
     inv = await send_crypto_invoice (user_id, tovar_id, method_id)
 
 
-# In[54]:
+# In[56]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:10] == 'ipaidcryp_')
@@ -1003,7 +981,7 @@ async def crypto_payment_verify(call):
         succ = await send_msg (user_id, msg)
 
 
-# In[55]:
+# In[57]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:9] == 'buy_item_')
@@ -1030,7 +1008,7 @@ async def buy_handler(call):
     succ = await send_msg (user_id, msg, reply_markup=reply_markup)
 
 
-# In[56]:
+# In[58]:
 
 
 @dp.callback_query_handler(lambda x: x.data=='binance_transfer')
@@ -1040,7 +1018,7 @@ async def binance_handler(call):
     await send_binance_creds(user_id, user_data['lang'])
 
 
-# In[57]:
+# In[59]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:5] == 'gift_')
@@ -1065,7 +1043,7 @@ async def gift_handler(call):
     add_money_action(user_id, ADMIN_ID, amt, f"present: {tovary[tovar_id]['title']}")
 
 
-# In[58]:
+# In[60]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:5] == 'shop_')
@@ -1081,7 +1059,7 @@ async def checkout_handler(call):
     succ = await send_msg (user_id, text=desc, photo = tovar['image_url'], reply_markup=reply_markup)
 
 
-# In[59]:
+# In[61]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:6] == 'model_')
@@ -1102,7 +1080,7 @@ async def model_select_handler(call):
     succ = await send_msg (user_id, text=desc, photo = role['image_url'], reply_markup=reply_markup)    
 
 
-# In[60]:
+# In[62]:
 
 
 @dp.callback_query_handler(lambda x: x.data[:9] == 'actmodel_')
@@ -1120,7 +1098,7 @@ async def model_choose_handler(call):
     succ = await send_msg (user_id, msg)
 
 
-# In[61]:
+# In[63]:
 
 
 @dp.callback_query_handler()
@@ -1132,7 +1110,7 @@ async def inline_callback_btn_click (call):
         
 
 
-# In[62]:
+# In[64]:
 
 
 @dp.pre_checkout_query_handler()
@@ -1141,7 +1119,7 @@ async def process_pre_checkout_query(pre_checkout_query: PreCheckoutQuery):
     
 
 
-# In[63]:
+# In[65]:
 
 
 @dp.my_chat_member_handler()
@@ -1184,19 +1162,21 @@ async def added_to_chat(chat_member: types.ChatMemberUpdated):
                     msg = get_message('i_am_admin','eng')
 
 
-# In[64]:
+# In[66]:
 
 
 async def ban_user(user_id, comment):
+    print (f"Banning user {user_id}")
     user_data = await get_user_data(user_id)
     msg = get_message('you_were_banned', 'eng').format(comment)
     user_data['banned'] = True
     user_data['ban_comment'] = comment
+    user_data['user_id'] = user_id
     save_user_data(user_data)
     succ = await send_msg (user_id, msg)
 
 
-# In[65]:
+# In[67]:
 
 
 async def unban_user(user_id, comment):
@@ -1208,7 +1188,7 @@ async def unban_user(user_id, comment):
     succ = await send_msg (user_id, msg)
 
 
-# In[66]:
+# In[68]:
 
 
 async def send_gift_menu(giftuser):
@@ -1222,7 +1202,7 @@ async def send_gift_menu(giftuser):
     succ = await send_msg (ADMIN_ID, msg, reply_markup=reply_markup)
 
 
-# In[67]:
+# In[69]:
 
 
 @dp.message_handler(state=Form.give_user_money) # Принимаем состояние
@@ -1241,7 +1221,7 @@ async def gift_handler(message, state: FSMContext):
         succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[68]:
+# In[70]:
 
 
 @dp.message_handler(state=Form.ban_somebody) # Принимаем состояние
@@ -1262,7 +1242,7 @@ async def ban_user_handler(message, state: FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[69]:
+# In[71]:
 
 
 @dp.message_handler(state=Form.un_ban_somebody) # Принимаем состояние
@@ -1283,7 +1263,7 @@ async def un_ban_user_handle(message, state: FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[70]:
+# In[72]:
 
 
 @dp.message_handler(state=Form.state_set_curr_api_balance) # Принимаем состояние
@@ -1292,7 +1272,7 @@ async def got_curr_api_balance(message, state: FSMContext):
     await set_curr_api_balance(message.text)
 
 
-# In[71]:
+# In[73]:
 
 
 @dp.message_handler(commands='start')
@@ -1337,7 +1317,7 @@ async def start_message(message: types.Message):
                 await check_balance_warn()
 
 
-# In[72]:
+# In[74]:
 
 
 @dp.message_handler(content_types=['successful_payment'])
@@ -1364,7 +1344,7 @@ async def got_payment(message):
     succ = await send_msg (ADMIN_ID, adm_msg)
 
 
-# In[73]:
+# In[75]:
 
 
 @dp.message_handler(commands='my_ids')
@@ -1374,7 +1354,7 @@ async def send_ids(message: types.Message):
     succ = await send_msg (user_id, msg)
 
 
-# In[74]:
+# In[76]:
 
 
 @dp.message_handler(commands='menu')
@@ -1384,7 +1364,7 @@ async def send_user_menu_handler(message: types.Message):
     await send_user_menu(user_id, user_data['lang'])
 
 
-# In[75]:
+# In[77]:
 
 
 @dp.message_handler(commands='shop')
@@ -1396,7 +1376,7 @@ async def send_shop(message: types.Message):
     await send_shop_message(user_data)
 
 
-# In[76]:
+# In[78]:
 
 
 @dp.message_handler(commands='referal')
@@ -1408,7 +1388,7 @@ async def send_reflink(message: types.Message):
     succ = await send_msg (user_id, msg)
 
 
-# In[77]:
+# In[79]:
 
 
 @dp.message_handler(state=Form.vision_mode) # Принимаем состояние
@@ -1460,14 +1440,14 @@ async def process_vision_request(message, state: FSMContext):
         money_used = calc_USD_spent(0,image_size)
         user_data['balance'] -= money_used * TARIF_MODIFICATOR
         save_user_data(user_data)
-        log_message_history(user_id,user_id, 0, f'image: {vision_url}', 0, message.date)
+        log_message_history(user_id, me.id, 0, f'image: {vision_url}', 0, message.date)
         add_money_action(user_id,user_id, - money_used, 'vision')
         currmoney.value -= money_used
         last_spent += money_used
         await check_balance_warn()
 
 
-# In[78]:
+# In[80]:
 
 
 @dp.message_handler(state=Form.broadcast_chats) # Принимаем состояние
@@ -1481,7 +1461,7 @@ async def broadcast_chats_handler(message, state: FSMContext):
     succ2 = await send_msg (ADMIN_ID, f"Broadcast FINISHED for {succ} CHATS")
 
 
-# In[79]:
+# In[81]:
 
 
 @dp.message_handler(state=Form.broadcast_users) # Принимаем состояние
@@ -1496,7 +1476,7 @@ async def broadcast_users_handler(message, state: FSMContext):
     succ2 = await send_msg (ADMIN_ID, f"Broadcast FINISHED for {succ} USERS")
 
 
-# In[80]:
+# In[82]:
 
 
 @dp.message_handler(state=Form.set_eur_rate) # Принимаем состояние
@@ -1511,7 +1491,7 @@ async def get_eur_rate(message, state: FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[81]:
+# In[83]:
 
 
 @dp.message_handler(state=Form.set_rub_rate) # Принимаем состояние
@@ -1526,7 +1506,7 @@ async def get_rub_rate(message, state: FSMContext):
     succ = await send_msg (ADMIN_ID, msg)
 
 
-# In[82]:
+# In[84]:
 
 
 def should_bot_answer(message, chat_data, owner_data, req_text):
@@ -1573,7 +1553,7 @@ def should_bot_answer(message, chat_data, owner_data, req_text):
         # каждый N-й пост нужно комментить (без контеста)
 
 
-# In[83]:
+# In[85]:
 
 
 @dp.message_handler(content_types='any')
@@ -1625,7 +1605,12 @@ async def handle_message(message: types.Message):
         
         
     log_message_history(message.chat.id, message.from_user.id, role_id, req_text, 0, message.date)
-    context = get_context(message.chat.id, role_id)
+    
+    context=[]
+    if message.from_user.id != 777000:
+        context = get_context(message.chat.id, role_id)    
+
+    
     role_prompt = get_role_models()[role_id]['prompt']
     
     if role_id ==-1:
@@ -1634,22 +1619,25 @@ async def handle_message(message: types.Message):
     if req_text =='':
         print ("blank message, ignoring it")
         return
+    if not answer:
+        print (F"NOT answer")
+        return
     
 
 
     chat_answer = should_bot_answer(message, chat_data, owner_data, req_text)
             
     if chat_answer and answer:
-        trim_cont = trim_context("\n".join(context))
-        if message.from_user.id == 777000:
-            trim_cont = ''
         if len (req_text)>1:
             wait_msg = get_message('processing', owner_data['lang'])
             wait_msg_tg = await send_msg (message.chat.id, text=wait_msg, reply_to_message_id = message.message_id)
-            query = f"{role_prompt}:\n\n{trim_cont}\n\n{req_text}###".strip()
-            msg, add_tokens, success = await get_openai_response (query)
+#            trim_cont = trim_context("\n".join(context))
+#            query = f"{role_prompt}:\n\n{trim_cont}\n\n{req_text}###".strip()
+#            msg, add_tokens = await get_openai_response (query)
+            query = f"{role_prompt}:\n\n{context}\n\n{req_text}###".strip()
+            msg, add_tokens = await get_openai_response2 (role_prompt, context, req_text)
             await bot.delete_message (message.chat.id, wait_msg_tg.message_id)
-            if (success) and msg.strip():
+            if (add_tokens) and msg.strip():
                 log_message_history(message.chat.id, me.id, role_id, msg, add_tokens, utc())
                 balance_used = calc_USD_spent(add_tokens)
                 currmoney.value -= balance_used
@@ -1665,7 +1653,6 @@ async def handle_message(message: types.Message):
                 print (f"Got error from OpenAI, or it rerurned NO message: '{msg}'")
         else:
             print (f"Input message too short, will NOT answer.")
-#        print (f"{success}: ({add_tokens} tokens), chat_answer {chat_answer}, answer {answer}. context: {context}\ntrim:{trim_cont}\nrole_prompt:{role_prompt}\nmessage={message.text}\nMSG:{msg}")
     else:
         upd_chat_counter(message.chat.id, chat_data['skipped'] +1)
 

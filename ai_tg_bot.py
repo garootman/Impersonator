@@ -1,101 +1,24 @@
-import openai
 from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, LabeledPrice, PreCheckoutQuery, KeyboardButton, ReplyKeyboardMarkup
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, LabeledPrice, PreCheckoutQuery, KeyboardButton, ReplyKeyboardMarkup, InputFile
 from aiogram.utils import executor
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
-import re
-import sqlite3
 from bot_config import *
 import os
 import json
 from datetime import datetime, timedelta
 
+
 global me, currmoney, channels_data, noted_of_money_shortage
 
-
-
-
-
-def dict_factory(cursor, row):
-    d = {}
-    for idx, col in enumerate(cursor.description):
-        d[col[0]] = row[idx]
-    return d
 
 
 # Initialize Telegram Bot
 bot = Bot(token=TG_TOKEN)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
-# Connect to SQLite database
-conn = sqlite3.connect(DB_FILE)
-conn.row_factory = dict_factory
-cursor = conn.cursor()
 
-# Init OpenAI
-openai.api_key = openai_key
-
-
-def calc_USD_spent (tokens_spent, model=DEFAULT_TEXT_MODEL):
-    if model[:3] =='img':
-        return AI_MODELS[model]['ktoken_price']
-    else:
-        if model not in AI_MODELS:
-            model = DEFAULT_MODEL
-        return tokens_spent / 1000 * AI_MODELS[model]['ktoken_price']
-    
-    
-def non_english_symbols_regex(string: str):
-    pattern = re.compile(r'[^\x20-\x7E]')
-    return pattern.findall(string)
-
-
-
-async def get_openai_response (prompt, model=DEFAULT_TEXT_MODEL):
-    max_tokens = max(200, min(MAX_REQUEST_LENGHT - CONTIGENCY - estimate_token_count(prompt), 4095))
-    try:
-        resp = await openai.Completion.acreate(
-            engine=model,
-            prompt=prompt,
-            max_tokens=max_tokens,
-            n=1,
-            stop="###",
-            temperature=TEMPERATURE,
-        )
-        token_used = int(resp["usage"]["total_tokens"] )
-        resp = str(resp.choices[0].text).strip()
-        success = True
-    except Exception as e:
-        success = False
-        resp = (f"OpenAI error:\n{str(e)}")
-        token_used = 0
-    return resp, token_used, success
-
-
-def estimate_token_count(prompt):
-    estimated_token_count = 0
-    words = prompt.split()
-    for word in words:
-        if len(non_english_symbols_regex(word)) > 1:
-            estimated_token_count+=TOKENS_PER_WORD['rus']
-        else:
-            estimated_token_count+=TOKENS_PER_WORD['eng']
-    estimated_token_count = int(estimated_token_count)
-    estimated_token_count += len([i for i in prompt if re.sub(r'[\w\s]+', '', i, flags=re.UNICODE)])
-    return int(estimated_token_count)
-
-
-async def generate_vision (prompt, model=DEFAULT_IMAGE_MODEL):
-    try:
-        response = await openai.Image.acreate(prompt=prompt, n=1, size=model.replace('img',''))
-        resp = response['data'][0]['url']
-        success = True
-    except Exception as e:
-        resp = f"Error generating image:\n{str(e)}"
-        success = False
-    return resp, success
 
 def trim_context(txt, model=DEFAULT_TEXT_MODEL):
     if model not in AI_MODELS: model = DEFAULT_TEXT_MODEL
@@ -250,4 +173,4 @@ currmoney = balance()
 last_spent = 0
 noted_of_money_shortage = False
 
-print("Bot and stuff initiated!")
+print("TG Bot and initiated!")

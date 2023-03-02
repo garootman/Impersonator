@@ -1,5 +1,5 @@
 # ACCESSES
-openai_key="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"
+openai_key="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"
 TG_TOKEN = "5566311336:AAEXq-Q_yLncQwyMaFuI463h6-7fGPDak5Q"
 NOWPAYMENTS_KEY = "87Y9HHA-GEZ4TB9-HA1S789-JXBWMTS" # PROD
 ADMIN_ID = 62408647               # тот у кого будет доступ к админ-командам
@@ -65,6 +65,7 @@ DEFAULT_IMAGE_MODEL = 'img512x512'
 
 
 AI_MODELS = {
+    'gpt-3.5-turbo':{'maxtokens':4095, 'ktoken_price':0.002, },
     'text-davinci-003':{'maxtokens':4000, 'ktoken_price':0.02, },
     'text-curie-001':{'maxtokens':2048, 'ktoken_price':0.002, },
     'text-babbage-001':{'maxtokens':2048, 'ktoken_price':0.0005, },
@@ -85,4 +86,4 @@ OPENAI_BALANCE_FILE = 'balance.txt'
 GOOGLE_API_KEY_FILE = "./ai-with-radix-09328f41ef89.json"
 ROLE_MODELS_FILE = 'role_models.json'
 DB_FILE = "impersonator_bot_data.db"
-
+CHAT_DUMP_FILE = 'all_chats.json'
