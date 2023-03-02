@@ -39,7 +39,7 @@ async def get_openai_response (prompt, model=DEFAULT_TEXT_MODEL):
 
 async def get_openai_response2 (role_prompt, context, msg):
     msg_list = [{'role':'system','content': role_prompt}, *context, {'role':'user', 'content':msg}]
-    print (msg_list)
+#    print (msg_list)
     req_tokens = 0
     for i in msg_list:
         req_tokens +=3
@@ -47,7 +47,7 @@ async def get_openai_response2 (role_prompt, context, msg):
     max_tokens = min(max(4095 - CONTIGENCY - req_tokens, 200), 4095 - CONTIGENCY)
     
     try:
-        resp = openai.ChatCompletion.create(
+        resp = await openai.ChatCompletion.acreate(
           model="gpt-3.5-turbo",
           max_tokens=max_tokens,
           messages=msg_list,

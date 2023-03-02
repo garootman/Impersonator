@@ -1,6 +1,6 @@
 # ACCESSES
-openai_key="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"
-TG_TOKEN = "5566311336:AAEXq-Q_yLncQwyMaFuI463h6-7fGPDak5Q"
+openai_key="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"
+TG_TOKEN = "5954787913:AAHuAA9n0_CqJfRMPXGmOj7Kg-ntof11puE"
 NOWPAYMENTS_KEY = "87Y9HHA-GEZ4TB9-HA1S789-JXBWMTS" # PROD
 ADMIN_ID = 62408647               # тот у кого будет доступ к админ-командам
 BINANCE_USDER_ID = 51984839
@@ -27,8 +27,8 @@ SUBSCRIBE_CHECK_TIMEOUT = 5 * 60  # как часто проверять под�
 # FINANCE
 ADMIN_API_NOTIFY_LIMIT_USD = 10
 RATES_TO_USD = {'EUR': 0.921, 'RUB':73.1, 'USD':1.0}   # курсы валют. тут задаются, меняются админ-командами. 
-INITIAL_DEMO_USD_BALANCE = 0.50    # сколько денег зачислять юзеру при старте общения 
-REFERAL_INVITATION_BONUS = 0.50   # сколько денег начислять за реферала
+INITIAL_DEMO_USD_BALANCE = 0.20    # сколько денег зачислять юзеру при старте общения 
+REFERAL_INVITATION_BONUS = 0.20   # сколько денег начислять за реферала
 TARIF_MODIFICATOR = 2.0
 
 
@@ -60,7 +60,7 @@ CONTIGENCY = 200   # запас токенов на каждый запрос, �
 TEMPERATURE = 0.5 # температура запроса. читать мануалы чтобы понять что это
 
 
-DEFAULT_TEXT_MODEL = 'text-davinci-003'
+DEFAULT_TEXT_MODEL = 'gpt-3.5-turbo'
 DEFAULT_IMAGE_MODEL = 'img512x512'
 
 
