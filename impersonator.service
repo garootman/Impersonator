@@ -1,0 +1,26 @@
+#sudo adduser impersonator_user
+#sudo chown -R shebobot /home/tg_bot_impersonator/
+sudo chmod -R 755 /home/tg_bot_impersonator/
+#sudo nano /etc/systemd/system/impersonator_bot.service
+[Unit]
+Description=Impersonator GPT Bot
+After=multi-user.target
+
+[Service]
+Type=simple
+User=impersonator_user
+WorkingDirectory=/home/tg_bot_impersonator/
+Environment="PATH=/home/tg_bot_impersonator/venv/bin/"
+
+#ExecStart=/home/tg_bot_impersonator/venv/bin/python /path/to/your/script.py
+ExecStart=/bin/bash -c "/home/tg_bot_impersonator/venv/bin/python impersonator.py"
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+
+#sudo systemctl daemon-reload
+#sudo systemctl restart impersonator_bot.service
+#sudo systemctl status impersonator_bot.service
+#sudo journalctl -u impersonator_bot.service

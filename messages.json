@@ -29,8 +29,8 @@
         "rus": "Команда доступна только администратору"
     },
     "limits_out": {
-        "eng": "You have exceeded AI API limits. Please use /shop to buy some more",
-        "rus": "Вы израсходовали лимиты на обращение к нейросети, используйте /shop чтобы купить ещё."
+        "eng": "You have exceeded AI API limits. Please use /shop to buy some more or use /referal link to invite your friend to use the bot!",
+        "rus": "Вы израсходовали лимиты на обращение к нейросети, используйте /shop чтобы купить ещё, или /referal чтобы пригласить друзей."
     },
     "cleared": {
         "eng": "Chat context cleared!",
