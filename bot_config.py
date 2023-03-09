@@ -1,10 +1,10 @@
 # ACCESSES
 openai_key="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"
-TG_TOKEN = "5954787913:AAHuAA9n0_CqJfRMPXGmOj7Kg-ntof11puE" # My OpenAI ChatGPT bot
-#TG_TOKEN = "5566311336:AAE4MBVzFjBL8DdliyhP7tE5Qs6o9PMynUA" # STRIPE TEST BOT
+#TG_TOKEN = "5954787913:AAHuAA9n0_CqJfRMPXGmOj7Kg-ntof11puE" # My OpenAI ChatGPT bot
+TG_TOKEN = "5566311336:AAE4MBVzFjBL8DdliyhP7tE5Qs6o9PMynUA" # STRIPE TEST BOT
 NOWPAYMENTS_KEY = "87Y9HHA-GEZ4TB9-HA1S789-JXBWMTS" # PROD
 ADMIN_ID = 62408647               # тот у кого будет доступ к админ-командам
-BINANCE_USDER_ID = 51984839
+CONTACT_ADMIN_URL = "https://t.me/mr_garuda/" # ссылка для "написать админу". может быть любой
 BINANCE_USER_MAIL = "dksg87@gmail.com"
 
 
@@ -88,3 +88,5 @@ GOOGLE_API_KEY_FILE = "./ai-with-radix-09328f41ef89.json"
 ROLE_MODELS_FILE = 'role_models.json'
 DB_FILE = "impersonator_bot_data.db"
 CHAT_DUMP_FILE = 'all_chats.json'
+
+ROLES_IN_ROW = 2

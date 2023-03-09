@@ -25,4 +25,5 @@ WantedBy=multi-user.target
 #sudo systemctl daemon-reload
 #sudo systemctl restart impersonator_bot.service
 #sudo systemctl status impersonator_bot.service
+#sudo systemctl enable impersonator_bot.service
 #sudo journalctl -u impersonator_bot.service

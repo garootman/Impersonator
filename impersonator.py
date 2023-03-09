@@ -283,7 +283,7 @@ async def check_balance_warn():
 # In[18]:
 
 
-async def get_user_data(user_id):
+async def get_user_data(user_id, do_sub_check=True):
     global channels_data, me
     print (user_id)
     if (not me) or (channels_data == None):
@@ -314,7 +314,10 @@ async def get_user_data(user_id):
 
     if not user_data['subscribed'] or (utc()-user_data['subs_timestamp']).total_seconds() > SUBSCRIBE_CHECK_TIMEOUT:
         print (f"Checking subsription for {user_id}")
-        subscription = await send_unsub_message(user_id, user_data)
+        if (do_sub_check):
+            user_data['subscribed'] = await send_unsub_message(user_id, user_data)
+        else:
+            user_data['subscribed'] = False
     if user_id == ADMIN_ID:
         user_data['banned'] = False
         user_data['subscribed'] = True
@@ -551,10 +554,22 @@ def get_all_grout_chats_from_db():
 # In[31]:
 
 
-def get_users_chats(owner_id):
-    cursor.execute('SELECT * from chat_data WHERE owner_id=?',(owner_id,))
+async def get_users_chats(user_id):
+    cursor.execute('SELECT * from chat_data WHERE owner_id=?',(user_id,))
     userchats = cursor.fetchall()
-    return userchats
+    userchats= [i for i in userchats if ((i['chat_id']!= user_id) and (i.get('type') !='channel'))]
+    ret_chats = []
+    for i in userchats:
+        chat_data = await get_chat_data(i['chat_id'])
+        try:
+            chat = await bot.get_chat(i['chat_id'])
+        except:
+            continue
+            
+        ret_chats.append(i)
+    
+    
+    return ret_chats
 
 
 # In[32]:
@@ -582,8 +597,12 @@ async def send_user_menu(user_id, lang):
 
     rm = get_role_models()
     if USE_ROLE_MODELS:
-        for i in rm:
-            reply_markup.add(InlineKeyboardButton (text=rm[i]['name'], callback_data=f"model_{i}_{user_id}"))
+        rmkeys = list(rm.keys())
+        rmkeys.remove(-1)
+        for i in range(0,len(rmkeys), ROLES_IN_ROW):
+            row_rm = rmkeys[i:i+ROLES_IN_ROW]
+            reply_markup.row(*(InlineKeyboardButton (text=rm[_]['name'], callback_data=f"model_{_}_{user_id}") for _ in row_rm))
+        
         reply_markup.add(InlineKeyboardButton (text="--------", callback_data=f"NONE"))
         
         if GROUP_LINK:
@@ -605,10 +624,9 @@ async def send_user_menu(user_id, lang):
         if (USE_SHOP):
             reply_markup.row(InlineKeyboardButton("🍖 Shop", callback_data='show_shop'))
         if (USE_VISION):
-            reply_markup.row(InlineKeyboardButton("🖼 Generate Image", callback_data='get_vision'))
+            reply_markup.row(InlineKeyboardButton("🖼 Image", callback_data='get_vision'))
         if (USE_CONTACT_ADMIN):
-            admin_chat = await bot.get_chat(ADMIN_ID)
-            admin_url = admin_chat.user_url
+            admin_url = CONTACT_ADMIN_URL
             reply_markup.row(InlineKeyboardButton("🆘 Contact Admin", url=admin_url))
 
     elif lang == 'rus':
@@ -618,10 +636,9 @@ async def send_user_menu(user_id, lang):
         if (USE_SHOP):
             reply_markup.row(InlineKeyboardButton("🍖 Магазин", callback_data='show_shop'))
         if (USE_VISION):
-            reply_markup.row(InlineKeyboardButton("🖼 Сгенерировать картинку", callback_data='get_vision'))
+            reply_markup.row(InlineKeyboardButton("🖼 Картинка", callback_data='get_vision'))
         if (USE_CONTACT_ADMIN):
-            admin_chat = await bot.get_chat(ADMIN_ID)
-            admin_url = admin_chat.user_url
+            admin_url = CONTACT_ADMIN_URL
             reply_markup.row(InlineKeyboardButton("🆘 Написать Админу", url=admin_url))
 
 
@@ -698,7 +715,7 @@ async def lang_select_handler(call):
     msg = get_message('lang_selected', user_data['lang'])
     save_user_data(user_data)
     succ = await send_msg (user_id, msg)
-    await send_user_menu(user_id, user_data['lang'])
+#    await send_user_menu(user_id, user_data['lang'])
 
 
 # In[38]:
@@ -728,7 +745,7 @@ async def my_chats_handler(call):
     user_data = await get_user_data(user_id)
     reply_markup = InlineKeyboardMarkup()
     msg = get_message('here_are_your_chats', user_data['lang'])
-    userchats = get_users_chats(user_id)
+    userchats = await get_users_chats(user_id)
     rm = get_role_models()
     for i in userchats:
         if i['chat_id'] == user_id:
@@ -739,7 +756,8 @@ async def my_chats_handler(call):
         currai = chat_data['role_id']
         ainame = rm[currai]['name']
         btn_text = f"{i['title']} – {ainame}"
-        reply_markup.add(InlineKeyboardButton (text=btn_text, callback_data=f"setchat_{i['chat_id']}"))
+        cbd = f"setchat_{i['chat_id']}"
+        reply_markup.add(InlineKeyboardButton (text=btn_text, callback_data=cbd))
     succ = await send_msg (user_id, msg, reply_markup=reply_markup)
 
 
@@ -755,8 +773,13 @@ async def my_chats_handler(call):
     chat_data = await get_chat_data(chat_id)
     rm = get_role_models()
     msg = get_message('here_are_rms', user_data['lang']).format(chat_data['title'], chat_id, rm[chat_data['role_id']]['name'])
-    for i in rm:
-        reply_markup.add(InlineKeyboardButton (text=rm[i]['name'], callback_data=f"model_{str(i)}_{str(chat_id)}"))
+#    for i in rm:
+#        reply_markup.add(InlineKeyboardButton (text=rm[i]['name'], callback_data=f"model_{str(i)}_{str(chat_id)}"))
+    rmkeys = list(rm.keys())
+    for i in range(0,len(rmkeys), ROLES_IN_ROW):
+        row_rm = rmkeys[i:i+ROLES_IN_ROW]
+        reply_markup.row(*(InlineKeyboardButton (text=rm[_]['name'], callback_data=f"model_{_}_{chat_id}") for _ in row_rm))        
+        
     succ = await send_msg (user_id, msg, reply_markup = reply_markup)
 
 
@@ -1105,6 +1128,7 @@ async def model_choose_handler(call):
     rm_num = int(call.data.split('_')[1])
     chat_id = int(call.data.split('_')[2])
     cursor.execute('UPDATE chat_data set role_id=? WHERE chat_id=?',(rm_num, chat_id))
+    print (f"\n\nUPDATING ROLE in chat id={chat_id}")
     conn.commit()   
     title = await get_chat_data(chat_id)
     title = title['title']
@@ -1293,13 +1317,13 @@ async def got_curr_api_balance(message, state: FSMContext):
 async def start_message(message: types.Message):
     user_id = message.from_user.id
     chat_id = message.chat.id
-    user_data = await get_user_data(user_id)
+    user_data = await get_user_data(user_id, do_sub_check=False)
 
     markup = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, is_persistent=True)
     markup.add (KeyboardButton('🎹 MENU',))
     if user_id==ADMIN_ID:
         markup.add (KeyboardButton('⚙️ ADMIN MENU'))
-    succ = await send_msg (user_id, "Hello there!", reply_markup=markup)
+    succ = await send_msg (user_id, "🖐", reply_markup=markup)
 
     
     reply_markup = InlineKeyboardMarkup()
@@ -1642,7 +1666,7 @@ async def handle_message(message: types.Message):
     chat_answer = should_bot_answer(message, chat_data, owner_data, req_text)
             
     if chat_answer and answer:
-        if len (req_text)>1:
+        if len (req_text)>=1:
             wait_msg = get_message('processing', owner_data['lang'])
             wait_msg_tg = await send_msg (message.chat.id, text=wait_msg, reply_to_message_id = message.message_id)
 #            trim_cont = trim_context("\n".join(context))
@@ -1676,3 +1700,4 @@ if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
 # ====== END =====
 # In[ ]:
+
