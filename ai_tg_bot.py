@@ -19,6 +19,16 @@ bot = Bot(token=TG_TOKEN)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
 
+def get_role_models():
+    with open (ROLE_MODELS_FILE,'r',encoding='utf-8') as f:
+        role_models = json.load(f)
+    role_models = {int(i):role_models[i] for i in role_models}
+    for k, v in role_models.items():
+        if v.get('model') not in AI_MODELS.keys():
+            v['model'] = DEFAULT_TEXT_MODEL
+            role_models[k] = v
+    return role_models
+
 
 def trim_context(txt, model=DEFAULT_TEXT_MODEL):
     if model not in AI_MODELS: model = DEFAULT_TEXT_MODEL

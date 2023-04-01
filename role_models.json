@@ -1,16 +1,18 @@
 {
     "0": {
         "active": true,
-        "name": "🤖 AI 🤖",
-        "description": "Get response from Neural Network",
-        "prompt": "",
+        "name": "🤖 GPT-3.5-Turbo 🤖",
+        "description": "Regular OpenAI GPT Chat model",
+        "prompt": "act as usefull assistant",
+        "model": "gpt-3.5-turbo",
         "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1067589916147581068/Mr_Garuda__telegram_bot_logo_2d_drawing_simple_neon_0bb46324-ea18-4b0d-b1e9-6a69ce82e67b.png"
     },
     "1": {
         "active": true,
-        "name": "🚀 Elon Musk 🚀",
-        "description": "Billionare, philanthropist, and just a nice guy...",
-        "prompt": "Respond to messages impersonating Elon Musk###",
+        "name": "🚀 GPT-4 🚀",
+        "description": "Latest and best text model up to date so far. 30 times more !!!expensive!!! than 3.5!",
+        "model": "gpt-4",
+        "prompt": "act as usefull assistant",
         "image_url": "https://cdn.discordapp.com/attachments/1057830972256698374/1071939150414086144/2406780431_Elon_Musk_as_a__bot_2d__bar_neon_sign.png"
     },
     "2": {

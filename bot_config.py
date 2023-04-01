@@ -15,6 +15,7 @@ USE_VISION = True
 USE_BALANCE_MONEY = True
 USE_TRANSLATE_TO_ENG = True
 USE_CONTACT_ADMIN = True
+USE_CONTEXT_MGMT = True
 
 #GROUP_LINK = "https://t.me/test0group01"
 GROUP_LINK = ""
@@ -57,7 +58,7 @@ ANSWER_RATIO = 0.4  # отношение максимальной длины о�
 CONTEXT_LEN = 10    # какой длины хвост из сообщений тянуть в контекст. 10 - это 5 запросов и 5 ответов
 MAX_REQUEST_LENGHT = 4095   # сколько токенов максимально на весь запрос-ответ. максимум - 4096. можно экспериментировать.
 TOKENS_PER_WORD = {"rus":9.5, 'eng':2.2}
-CONTIGENCY = 200   # запас токенов на каждый запрос, на всякий случай
+CONTIGENCY = 1000   # запас токенов на каждый запрос, на всякий случай
 TEMPERATURE = 0.5 # температура запроса. читать мануалы чтобы понять что это
 
 
@@ -66,17 +67,18 @@ DEFAULT_IMAGE_MODEL = 'img512x512'
 
 
 AI_MODELS = {
-    'gpt-3.5-turbo':{'maxtokens':4095, 'ktoken_price':0.002, },
-    'text-davinci-003':{'maxtokens':4000, 'ktoken_price':0.02, },
-    'text-curie-001':{'maxtokens':2048, 'ktoken_price':0.002, },
-    'text-babbage-001':{'maxtokens':2048, 'ktoken_price':0.0005, },
-    'text-ada-001':{'maxtokens':2048, 'ktoken_price':0.0004, },
-    'code-davinci-002':{'maxtokens':8000, 'ktoken_price':0.02, },
-    'code-cushman-001':{'maxtokens':2048, 'ktoken_price':0.02, },
+    'gpt-3.5-turbo':{'maxtokens':4095, 'ktoken_price_complete':0.002, },
+    'gpt-4':{'maxtokens':8192, 'ktoken_price_complete':0.06, 'ktoken_price_context':0.03},
+    'text-davinci-003':{'maxtokens':4000, 'ktoken_price_complete':0.02, },
+    'text-curie-001':{'maxtokens':2048, 'ktoken_price_complete':0.002, },
+    'text-babbage-001':{'maxtokens':2048, 'ktoken_price_complete':0.0005, },
+    'text-ada-001':{'maxtokens':2048, 'ktoken_price_complete':0.0004, },
+    'code-davinci-002':{'maxtokens':8000, 'ktoken_price_complete':0.02, },
+    'code-cushman-001':{'maxtokens':2048, 'ktoken_price_complete':0.02, },
     
-    'img1024x1024':{'maxtokens':0, 'ktoken_price':0.02, },
-    'img512x512':{'maxtokens':0, 'ktoken_price':0.018, },
-    'img256x256':{'maxtokens':0, 'ktoken_price':0.016, },
+    'img1024x1024':{'maxtokens':0, 'image_price':0.02, },
+    'img512x512':{'maxtokens':0, 'image_price':0.018, },
+    'img256x256':{'maxtokens':0, 'image_price':0.016, },
             }
 
 

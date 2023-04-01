@@ -1,0 +1,568 @@
+
+2023-04-01 20:04:42 | Messages skipped
+2023-04-01 20:04:42 | Bot started!
+2023-04-01 20:04:59 | 62408647
+2023-04-01 20:04:59 | Checking subsription for 62408647
+2023-04-01 20:06:05 | 62408647
+2023-04-01 20:06:05 | Checking subsription for 62408647
+2023-04-01 20:06:06 | {'user_id': 62408647, 'name': 'Дмитрий Козлов (@mr_garuda)', 'lang': 'eng', 'balance': 0.197908, 'banned': 0, 'subscribed': 1, 'ban_comment': '', 'subs_timestamp': datetime.datetime(2023, 3, 9, 22, 19, 1)}
+2023-04-01 20:06:06 | Save sub 62408647: True
+2023-04-01 20:06:08 | 62408647
+2023-04-01 20:06:14 | 62408647
+2023-04-01 20:06:16 | 62408647
+2023-04-01 20:06:16 | 
+
+UPDATING ROLE in chat id=62408647
+2023-04-01 20:06:18 | 62408647
+2023-04-01 20:06:19 | 62408647
+2023-04-01 20:06:22 | 62408647
+2023-04-01 20:06:22 | 
+
+UPDATING ROLE in chat id=62408647
+2023-04-01 20:06:57 | 62408647
+2023-04-01 20:06:57 | Logged 62408647: what are best ways and practices to create a long-term business that will probably last for centuries?
+2023-04-01 20:07:18 | Logged 62408647: Creating a business that lasts for centuries is a challenging task, but it is possible if you follow some best practices. Here are some ways to create a long-term business:
+
+1. Focus on building a strong brand: A strong brand is the foundation of a long-term business. It helps you establish your identity in the market and build customer loyalty.
+
+2. Develop a long-term vision: A long-term vision helps you stay focused on your goals and make strategic decisions that align with your business objectives.
+
+3. Invest in research and development: Innovation is essential for long-term success. Investing in research and development helps you stay ahead of the competition and adapt to changing market trends.
+
+4. Build a strong team: A strong team is critical for the success of any business. Hire talented and motivated individuals who share your vision and values.
+
+5. Focus on customer satisfaction: Customer satisfaction is key to building a long-term business. Focus on delivering high-quality products and services and building strong relationships with your customers.
+
+6. Manage your finances wisely: Managing your finances wisely is crucial for the long-term success of your business. Keep track of your expenses, maintain a healthy cash flow, and invest in growth opportunities.
+
+7. Stay flexible and adaptable: The business landscape is constantly evolving, and it's essential to stay flexible and adaptable. Be open to new ideas and opportunities, and be willing to pivot when necessary.
+
+By following these best practices, you can create a business that lasts for centuries.
+2023-04-01 20:07:18 | Added transaction: user 62408647, chat 62408647, minus -0.001436 USD: GPT usage
+2023-04-01 20:07:18 | Counter skip 62408647: 0
+2023-04-01 20:12:13 | Messages skipped
+2023-04-01 20:12:13 | Bot started!
+2023-04-01 20:18:22 | Messages skipped
+2023-04-01 20:18:22 | Bot started!
+2023-04-01 20:19:01 | 62408647
+2023-04-01 20:19:01 | Checking subsription for 62408647
+2023-04-01 20:19:01 | {'user_id': 62408647, 'name': 'Дмитрий Козлов (@mr_garuda)', 'lang': 'eng', 'balance': 0.196472, 'banned': 0, 'subscribed': 1, 'ban_comment': '', 'subs_timestamp': datetime.datetime(2023, 4, 1, 16, 6, 6)}
+2023-04-01 20:19:01 | Save sub 62408647: True
+2023-04-01 20:19:04 | 62408647
+2023-04-01 20:19:13 | 62408647
+2023-04-01 20:19:13 | 
+
+UPDATING ROLE in chat id=62408647
+2023-04-01 20:23:48 | 62408647
+2023-04-01 20:29:40 | 62408647
+2023-04-01 20:29:40 | Checking subsription for 62408647
+2023-04-01 20:29:41 | {'user_id': 62408647, 'name': 'Дмитрий Козлов (@mr_garuda)', 'lang': 'eng', 'balance': 0.196472, 'banned': 0, 'subscribed': 1, 'ban_comment': '', 'subs_timestamp': datetime.datetime(2023, 4, 1, 16, 19, 1)}
+2023-04-01 20:29:41 | Save sub 62408647: True
+2023-04-01 20:38:17 | Logged 62408647: /clear_context
+2023-04-01 20:38:39 | 62408647
+2023-04-01 20:38:40 | Checking subsription for 62408647
+2023-04-01 20:38:40 | {'user_id': 62408647, 'name': 'Дмитрий Козлов (@mr_garuda)', 'lang': 'eng', 'balance': 0.196472, 'banned': 0, 'subscribed': 1, 'ban_comment': '', 'subs_timestamp': datetime.datetime(2023, 4, 1, 16, 29, 41)}
+2023-04-01 20:38:40 | Save sub 62408647: True
+2023-04-01 20:38:40 | Logged 62408647: /clear_context
+2023-04-01 20:47:31 | Logged 62408647: suka suka!
+2023-04-01 20:47:39 | Logged 62408647: 22!
+2023-04-01 20:47:44 | Logged 62408647: /clear_context
+2023-04-01 20:47:59 | Logged 62408647: nana tekhnologii!
+2023-04-01 20:48:07 | Logged 62408647: /clear_context
+2023-04-01 20:48:33 | Messages skipped
+2023-04-01 20:48:33 | Bot started!
+2023-04-01 20:48:58 | 62408647
+2023-04-01 20:48:58 | Checking subsription for 62408647
+2023-04-01 20:48:58 | {'user_id': 62408647, 'name': 'Дмитрий Козлов (@mr_garuda)', 'lang': 'eng', 'balance': 0.196472, 'banned': 0, 'subscribed': 1, 'ban_comment': '', 'subs_timestamp': datetime.datetime(2023, 4, 1, 16, 38, 40)}
+2023-04-01 20:48:58 | Save sub 62408647: True
+2023-04-01 20:49:14 | 62408647
+2023-04-01 20:49:15 | 62408647
+2023-04-01 20:49:15 | 
+
+UPDATING ROLE in chat id=62408647
+2023-04-01 20:49:23 | 62408647
+2023-04-01 20:49:26 | 62408647
+2023-04-01 20:49:27 | 62408647
+2023-04-01 20:49:27 | Logged 62408647: /clear_context
+2023-04-01 20:49:33 | 62408647
+2023-04-01 20:49:33 | Logged 62408647: hello suka!
+2023-04-01 20:49:36 | Logged 62408647: Hello! How can I assist you today?
+2023-04-01 20:49:36 | Response for 62408647: 9 cont_tok + 31 compl_tok (8e-05 $ USD): Hello! How can I ass
+2023-04-01 20:49:36 | Added transaction: user 62408647, chat 62408647, minus -0.00016 USD: GPT usage
+2023-04-01 20:49:36 | Counter skip 62408647: 0
+2023-04-01 20:49:57 | 62408647
+2023-04-01 20:49:57 | Logged 62408647: how many tokens does GTP 3.5 use?
+2023-04-01 20:50:01 | Logged 62408647: GPT-3 uses up to 2048 tokens per input sequence. However, the actual number of tokens used can vary depending on the specific task and input provided.
+2023-04-01 20:50:01 | Response for 62408647: 34 cont_tok + 70 compl_tok (0.000208 $ USD): GPT-3 uses up to 204
+2023-04-01 20:50:01 | Added transaction: user 62408647, chat 62408647, minus -0.000416 USD: GPT usage
+2023-04-01 20:50:01 | Counter skip 62408647: 0
+2023-04-01 20:50:58 | Messages skipped
+2023-04-01 20:50:58 | Bot started!
+2023-04-01 20:51:05 | 62408647
+2023-04-01 20:51:05 | Logged 62408647: /context
+2023-04-01 20:51:09 | Logged 62408647: I'm sorry, I'm not sure what you mean by "/context". Can you please provide more information or context so I can better understand your request?
+2023-04-01 20:51:09 | Response for 62408647 (model gpt-3.5-turbo): 31 cont_tok + 104 compl_tok (0.00027 $ USD): I'm sorry, I'm not s
+2023-04-01 20:51:09 | Added transaction: user 62408647, chat 62408647, minus -0.00054 USD: GPT usage
+2023-04-01 20:51:09 | Counter skip 62408647: 0
+2023-04-01 20:54:53 | Messages skipped
+2023-04-01 20:54:53 | Bot started!
+2023-04-01 20:55:24 | 62408647
+2023-04-01 20:55:24 | Checking subsription for 62408647
+2023-04-01 20:55:24 | {'user_id': 62408647, 'name': 'Дмитрий Козлов (@mr_garuda)', 'lang': 'eng', 'balance': 0.195356, 'banned': 0, 'subscribed': 1, 'ban_comment': '', 'subs_timestamp': datetime.datetime(2023, 4, 1, 16, 48, 58)}
+2023-04-01 20:55:24 | Save sub 62408647: True
+2023-04-01 20:55:24 | Logged 62408647: /clear_context
+2023-04-01 20:55:29 | 62408647
+2023-04-01 20:55:32 | 62408647
+2023-04-01 20:55:35 | 5566311336
+2023-04-01 20:55:35 | Added transaction: user 5566311336, chat 5566311336,  0.2 USD: demo balance
+2023-04-01 20:55:35 | Checking subsription for 5566311336
+2023-04-01 20:55:35 | {'user_id': 5566311336, 'name': 'StripeTradeBot (@StripeTradeBot)', 'lang': 'eng', 'balance': 0.2, 'banned': 0, 'subscribed': 0, 'ban_comment': '', 'subs_timestamp': datetime.datetime(2020, 7, 5, 16, 55, 35)}
+2023-04-01 20:55:35 | Save sub 5566311336: True
+2023-04-01 20:55:35 | Added chat to DB: StripeTradeBot (@StripeTradeBot) (5566311336), owner 5566311336
+2023-04-01 20:55:35 | Logged 5566311336: /clear_context
+2023-04-01 20:55:36 | Could NOT send message to 5566311336: Forbidden: bot can't send messages to bots
+2023-04-01 20:56:32 | Messages skipped
+2023-04-01 20:56:32 | Bot started!
+2023-04-01 20:57:05 | 62408647
+2023-04-01 20:57:07 | 62408647
+2023-04-01 20:57:07 | Logged 62408647: /clear_context
+2023-04-01 20:57:09 | 62408647
+2023-04-01 20:57:10 | 62408647
+2023-04-01 20:57:10 | 
+
+UPDATING ROLE in chat id=62408647
+2023-04-01 20:57:13 | 62408647
+2023-04-01 20:57:13 | Logged 62408647: /star
+2023-04-01 20:57:17 | Logged 62408647: I'm sorry, I'm not sure what you mean by "/star". Can you please provide more information or context so I can better assist you?
+2023-04-01 20:57:17 | Response for 62408647 (model gpt-3.5-turbo): 30 cont_tok + 25 compl_tok (0.00011 $ USD): I'm sorry, I'm not s
+2023-04-01 20:57:17 | Added transaction: user 62408647, chat 62408647, minus -0.00022 USD: GPT usage
+2023-04-01 20:57:17 | Counter skip 62408647: 0
+2023-04-01 20:57:18 | 62408647
+2023-04-01 20:58:04 | 62408647
+2023-04-01 20:58:06 | 62408647
+2023-04-01 20:58:07 | 62408647
+2023-04-01 20:58:10 | 62408647
+2023-04-01 20:58:10 | Logged 62408647: /clear_context
+2023-04-01 20:58:14 | 62408647
+2023-04-01 20:58:15 | 62408647
+2023-04-01 20:58:22 | 62408647
+2023-04-01 20:58:22 | Logged 62408647: allo ti kto?
+2023-04-01 20:58:25 | Logged 62408647: Ja som virtuálny asistent. Aký máte dopyt?
+2023-04-01 20:58:25 | Response for 62408647 (model gpt-3.5-turbo): 17 cont_tok + 33 compl_tok (0.0001 $ USD): Ja som virtuálny asi
+2023-04-01 20:58:25 | Added transaction: user 62408647, chat 62408647, minus -0.0002 USD: GPT usage
+2023-04-01 20:58:25 | Counter skip 62408647: 0
+2023-04-01 20:58:35 | 62408647
+2023-04-01 20:58:35 | Logged 62408647: what language was that?
+2023-04-01 20:58:38 | Logged 62408647: That was Slovak language.
+2023-04-01 20:58:38 | Response for 62408647 (model gpt-3.5-turbo): 5 cont_tok + 65 compl_tok (0.00014 $ USD): That was Slovak lang
+2023-04-01 20:58:38 | Added transaction: user 62408647, chat 62408647, minus -0.00028 USD: GPT usage
+2023-04-01 20:58:38 | Counter skip 62408647: 0
+2023-04-01 20:59:13 | 62408647
+2023-04-01 20:59:13 | Logged 62408647: write in both Slovak and english further on. 
+who is Nagatoro-San?
+2023-04-01 20:59:24 | Logged 62408647: Nagatoro-san je fiktívna postava z japonskej mangy a anime série "Don't Toy With Me, Miss Nagatoro" od autora Nanashi. Je to stredoškolská študentka, ktorá má radi trápiť a flirtovať s hlavným mužským hrdinom. 
+
+In English:
+
+Nagatoro-san is a fictional character from the Japanese manga and anime series "Don't Toy With Me, Miss Nagatoro" by Nanashi. She is a high school student who enjoys teasing and flirting with the male protagonist.
+2023-04-01 20:59:24 | Response for 62408647 (model gpt-3.5-turbo): 134 cont_tok + 111 compl_tok (0.00049 $ USD): Nagatoro-san je fikt
+2023-04-01 20:59:24 | Added transaction: user 62408647, chat 62408647, minus -0.00098 USD: GPT usage
+2023-04-01 20:59:24 | Counter skip 62408647: 0
+2023-04-01 20:59:49 | 62408647
+2023-04-01 21:00:04 | 62408647
+2023-04-01 21:00:04 | Logged 62408647: what is so special about her?
+2023-04-01 21:00:13 | Logged 62408647: Nagatoro-san is a popular character among fans of the manga and anime series due to her unique personality and behavior. She is often seen teasing and bullying the male protagonist, but at the same time, she shows a caring and supportive side towards him. Her character has a mix of tsundere (a character who is initially cold and hostile but later shows a warm and caring side) and sadistic traits, which makes her a complex and interesting character. Additionally, her design and appearance have also contributed to her popularity among fans.
+2023-04-01 21:00:13 | Response for 62408647 (model gpt-3.5-turbo): 108 cont_tok + 251 compl_tok (0.000718 $ USD): Nagatoro-san is a po
+2023-04-01 21:00:13 | Added transaction: user 62408647, chat 62408647, minus -0.001436 USD: GPT usage
+2023-04-01 21:00:13 | Counter skip 62408647: 0
+2023-04-01 21:00:43 | 62408647
+2023-04-01 21:00:43 | Checking subsription for 62408647
+2023-04-01 21:00:44 | {'user_id': 62408647, 'name': 'Дмитрий Козлов (@mr_garuda)', 'lang': 'rus', 'balance': 0.19224, 'banned': 0, 'subscribed': 1, 'ban_comment': '', 'subs_timestamp': datetime.datetime(2023, 4, 1, 16, 55, 24)}
+2023-04-01 21:00:44 | Save sub 62408647: True
+2023-04-01 21:01:28 | 62408647
+2023-04-01 21:01:28 | Logged 62408647: translate our whole dialog to Russina
+2023-04-01 21:01:55 | Logged 62408647: Sure, here's the translation of our entire conversation in Russian:
+
+Пользователь: Кто такая Нагаторо-сан?
+
+Я: Нагаторо-сан - это вымышленный персонаж из японской манги и аниме-серии "Don't Toy With Me, Miss Nagatoro" от автора Nanashi. Она - старшеклассница, которая любит дразнить и флиртовать с главным мужским героем.
+
+Пользователь: Что особенного в ней?
+
+Я: Нагаторо-сан - популярный персонаж среди поклонников манги и аниме-серии благодаря ее уникальной личности и поведению. Она часто дразнит и обижает мужского героя, но в то же время проявляет заботливую и поддерживающую сторону к нему. Ее характер объединяет черты тсундере (персонаж, который изначально холоден и враждебен, но позже показывает теплую и заботливую сторону) и садиста, что делает ее сложным и интересным персонажем. Кроме того, ее дизайн и внешний вид также способствовали ее популярности среди поклонников.
+2023-04-01 21:01:55 | Response for 62408647 (model gpt-3.5-turbo): 405 cont_tok + 376 compl_tok (0.001562 $ USD): Sure, here's the tra
+2023-04-01 21:01:55 | Added transaction: user 62408647, chat 62408647, minus -0.003124 USD: GPT usage
+2023-04-01 21:01:55 | Counter skip 62408647: 0
+2023-04-01 21:02:18 | 62408647
+2023-04-01 21:02:24 | 62408647
+2023-04-01 21:02:24 | Logged 62408647: /clear_context
+2023-04-01 21:02:28 | 62408647
+2023-04-01 21:02:53 | 62408647
+2023-04-01 21:02:53 | Logged 62408647: что такое собака павлова?
+2023-04-01 21:03:08 | Logged 62408647: Собака Павлова - это термин, который относится к эксперименту, проведенному российским физиологом Иваном Павловым в начале 20 века. В этом эксперименте собакам предъявляли еду вместе с звуком колокольчика. Постепенно собаки начинали связывать звук колокольчика с едой и начинали слюнить при звуке колокольчика, даже если еды не было. Это явление называется условным рефлексом, и оно стало известно как "собака Павлова". Этот эксперимент имел большое значение для понимания процессов обучения и поведения животных.
+2023-04-01 21:03:08 | Response for 62408647 (model gpt-3.5-turbo): 238 cont_tok + 51 compl_tok (0.000578 $ USD): Собака Павлова - это
+2023-04-01 21:03:08 | Added transaction: user 62408647, chat 62408647, minus -0.001156 USD: GPT usage
+2023-04-01 21:03:08 | Counter skip 62408647: 0
+2023-04-01 21:03:16 | 62408647
+2023-04-01 21:03:29 | 62408647
+2023-04-01 21:03:29 | Logged 62408647: объясни это будто мне 5 лет
+2023-04-01 21:03:41 | Logged 62408647: Собака Павлова - это эксперимент, который проводил ученый Павлов. Он давал собакам еду и звонил колокольчиком. Собаки начали связывать звон колокольчика с едой и начинали слюнить, даже если еды не было. Это было потому, что их мозги научились связывать звук колокольчика с едой. Это помогло ученым понять, как мозги животных работают и как они могут учиться.
+2023-04-01 21:03:41 | Response for 62408647 (model gpt-3.5-turbo): 170 cont_tok + 313 compl_tok (0.000966 $ USD): Собака Павлова - это
+2023-04-01 21:03:41 | Added transaction: user 62408647, chat 62408647, minus -0.001932 USD: GPT usage
+2023-04-01 21:03:41 | Counter skip 62408647: 0
+2023-04-01 21:04:08 | 62408647
+2023-04-01 21:04:08 | Logged 62408647: напиши об этом хокку
+2023-04-01 21:04:12 | Logged 62408647: Собака слюнится,
+Звон колокольчика здесь -
+Условный рефлекс.
+2023-04-01 21:04:12 | Response for 62408647 (model gpt-3.5-turbo): 31 cont_tok + 499 compl_tok (0.00106 $ USD): Собака слюнится,
+Зво
+2023-04-01 21:04:12 | Added transaction: user 62408647, chat 62408647, minus -0.00212 USD: GPT usage
+2023-04-01 21:04:12 | Counter skip 62408647: 0
+2023-04-01 21:05:04 | 62408647
+2023-04-01 21:05:04 | Logged 62408647: охуенчик, молодец!
+2023-04-01 21:05:09 | Logged 62408647: Спасибо, я стараюсь быть полезным и помочь вам! Если у вас есть еще какие-то вопросы или нужна помощь, обращайтесь!
+2023-04-01 21:05:09 | Response for 62408647 (model gpt-3.5-turbo): 55 cont_tok + 556 compl_tok (0.001222 $ USD): Спасибо, я стараюсь 
+2023-04-01 21:05:09 | Added transaction: user 62408647, chat 62408647, minus -0.002444 USD: GPT usage
+2023-04-01 21:05:09 | Counter skip 62408647: 0
+2023-04-01 21:08:11 | Messages skipped
+2023-04-01 21:08:11 | Bot started!
+2023-04-01 21:08:24 | 62408647
+2023-04-01 21:08:24 | Checking subsription for 62408647
+2023-04-01 21:08:24 | {'user_id': 62408647, 'name': 'Дмитрий Козлов (@mr_garuda)', 'lang': 'rus', 'balance': 0.181464, 'banned': 0, 'subscribed': 1, 'ban_comment': '', 'subs_timestamp': datetime.datetime(2023, 4, 1, 17, 0, 44)}
+2023-04-01 21:08:24 | Save sub 62408647: True
+2023-04-01 21:08:29 | 62408647
+2023-04-01 21:08:29 | Logged 62408647: /clear_context
+2023-04-01 21:08:45 | 62408647
+2023-04-01 21:08:45 | Logged 62408647: как начать работать над своей дисциплиной, если я плаксивая сучка?
+2023-04-01 21:09:20 | Logged 62408647: Первым шагом будет признание того, что у вас есть проблема с дисциплиной и что вы хотите изменить это. Затем вы можете попробовать следующие шаги:
+
+1. Определите свои цели и приоритеты. Напишите список того, что вам нужно сделать и в каком порядке. Установите сроки выполнения каждой задачи.
+
+2. Создайте расписание и придерживайтесь его. Распределите свое время между работой, учебой, отдыхом и другими обязательствами.
+
+3. Научитесь говорить "нет". Если вы часто отвлекаетесь на другие задачи или обязательства, которые не имеют приоритета, научитесь говорить "нет" и сосредоточиться на своих целях.
+
+4. Найдите мотивацию. Поставьте перед собой цель и найдите способы мотивации для ее достижения. Например, наградите себя за выполнение задачи.
+
+5. Изучайте техники управления временем. Существует множество техник, которые помогут вам более эффективно использовать свое время и управлять своими обязательствами.
+
+6. Не бойтесь ошибаться. Никто не совершает все правильно с первого раза. Если вы сделали ошибку, извлеките из нее урок и продолжайте двигаться вперед.
+
+7. Найдите поддержку. Расскажите своим друзьям или близким о своих целях и попросите их поддержки. Вы также можете обратиться к профессиональному консультанту, который поможет вам разработать план действий и научиться управлять своим временем и обязательствами.
+2023-04-01 21:09:20 | Response for 62408647 (model gpt-3.5-turbo): 81 cont_tok + 543 compl_tok (0.001248 $ USD): Первым шагом будет п
+2023-04-01 21:09:20 | Added transaction: user 62408647, chat 62408647, minus -0.002496 USD: GPT usage
+2023-04-01 21:09:20 | Counter skip 62408647: 0
+2023-04-01 21:10:54 | 62408647
+2023-04-01 21:10:54 | Logged 62408647: расскажи про лучшие методы для пункта 5
+2023-04-01 21:11:39 | Logged 62408647: Как я уже упоминал, существует множество техник управления временем, которые помогут вам более эффективно использовать свое время и управлять своими обязательствами. Некоторые из лучших методов:
+
+1. Метод Помодоро. Этот метод предполагает работу в течение 25 минут, после чего вы делаете перерыв на 5 минут. После четырех таких циклов, вы делаете более продолжительный перерыв. Этот метод помогает сохранять концентрацию и бороться с отвлекающими факторами.
+
+2. Матрица Эйзенхауэра. Этот метод помогает определить приоритеты задач и распределить их по четырем категориям: важные и срочные, важные и несрочные, не важные и срочные, не важные и несрочные. Это помогает управлять своим временем и делать более осознанные решения.
+
+3. Метод GTD (Getting Things Done). Этот метод предполагает создание списка задач и их систематизацию по контексту (месту, где вы можете выполнить задачу) и приоритету. Это помогает управлять своими обязательствами и сделать более эффективный выбор того, что делать в данный момент.
+
+4. Техника "блокировки времени". Этот метод предполагает блокирование определенного времени на выполнение конкретной задачи. Например, вы можете заблокировать время на чтение электронной почты или на работу над проектом. Это помогает сохранять концентрацию и уменьшать отвлекающие факторы.
+
+5. Метод "Eat That Frog". Этот метод предполагает выполнение наиболее сложной и неприятной задачи первой в списке. Это помогает уменьшить уровень стресса и повысить продуктивность.
+
+Выберите тот метод, который подходит вам лучше всего, и попробуйте его в течение некоторого времени. Вы можете использовать несколько методов одновременно, чтобы достичь наилучших результатов.
+2023-04-01 21:11:39 | Response for 62408647 (model gpt-3.5-turbo): 641 cont_tok + 663 compl_tok (0.002608 $ USD): Как я уже упоминал, 
+2023-04-01 21:11:39 | Added transaction: user 62408647, chat 62408647, minus -0.005216 USD: GPT usage
+2023-04-01 21:11:39 | Counter skip 62408647: 0
+2023-04-01 21:14:45 | 62408647
+2023-04-01 21:14:45 | Checking subsription for 62408647
+2023-04-01 21:14:46 | {'user_id': 62408647, 'name': 'Дмитрий Козлов (@mr_garuda)', 'lang': 'rus', 'balance': 0.173752, 'banned': 0, 'subscribed': 1, 'ban_comment': '', 'subs_timestamp': datetime.datetime(2023, 4, 1, 17, 8, 24)}
+2023-04-01 21:14:46 | Save sub 62408647: True
+2023-04-01 21:14:57 | 62408647
+2023-04-01 21:14:57 | Logged 62408647: расскажи подробнее про GTD
+2023-04-01 21:15:30 | Logged 62408647: GTD (Getting Things Done) - это метод управления временем и задачами, разработанный Дэвидом Алленом. Он основан на идее того, что человек не может эффективно управлять своим временем и обязательствами, если он не имеет ясного представления о том, что ему нужно сделать. GTD предлагает систему для организации задач и проектов, которая позволяет управлять своим временем более эффективно.
+
+Система GTD состоит из пяти шагов:
+
+1. Сбор. Соберите все свои задачи и обязательства в одном месте. Это может быть список задач в блокноте, электронный документ или приложение для управления задачами.
+
+2. Обработка. Определите, что нужно сделать с каждой задачей. Если задача может быть выполнена за две минуты или менее, сделайте ее сразу. Если задача требует более времени, определите, когда и как ее выполнить.
+
+3. Организация. Организуйте свои задачи по контексту, приоритету и проекту. Например, вы можете создать список задач для работы, дома, покупок и т.д.
+
+4. Рецензирование. Регулярно просматривайте свои списки задач и обязательств, чтобы убедиться, что вы на правильном пути и не забыли ничего важного.
+
+5. Выполнение. Выполняйте свои задачи по списку и контексту. Не забывайте обновлять свой список задач и приоритеты по мере необходимости.
+
+Одним из ключ
+2023-04-01 21:15:30 | Response for 62408647 (model gpt-3.5-turbo): 1322 cont_tok + 503 compl_tok (0.00365 $ USD): GTD (Getting Things 
+2023-04-01 21:15:30 | Added transaction: user 62408647, chat 62408647, minus -0.0073 USD: GPT usage
+2023-04-01 21:15:30 | Counter skip 62408647: 0
+2023-04-01 21:17:16 | Messages skipped
+2023-04-01 21:17:16 | Bot started!
+2023-04-01 21:18:10 | 62408647
+2023-04-01 21:18:39 | 62408647
+2023-04-01 21:18:39 | Logged 62408647: продолжай
+2023-04-01 21:18:54 | Logged 62408647: Одним из ключевых принципов GTD является "вынос мозга". Это означает, что вы должны записывать все свои задачи, идеи и обязательства в одном месте, чтобы не забыть о них. Это помогает освободить ваш разум от постоянных напоминаний и сосредоточиться на текущей задаче.
+
+Еще одним важным принципом GTD является установление контекста. Контекст - это место, где вы можете выполнить задачу. Например, если у вас есть задача, связанная с покупкой продуктов, то контекстом может
+2023-04-01 21:18:54 | Response for 62408647 (model gpt-3.5-turbo): 1832 cont_tok + 200 compl_tok (0.004064 $ USD): Одним из ключевых пр
+2023-04-01 21:18:54 | Added transaction: user 62408647, chat 62408647, minus -0.008128 USD: GPT usage
+2023-04-01 21:18:54 | Counter skip 62408647: 0
+2023-04-01 21:19:17 | 62408647
+2023-04-01 21:19:33 | 62408647
+2023-04-01 21:19:33 | Logged 62408647: расскажи подробнее про контекст
+2023-04-01 21:19:47 | Logged 62408647: Контекст в системе GTD - это место, где вы можете выполнить задачу. Например, если у вас есть задача связанная с покупкой продуктов, то контекстом может быть "магазин". Если у вас есть задача связанная с работой, то контекстом может быть "офис".
+
+Контексты помогают организовать задачи по местам, где вы можете их выполнить. Это позволяет сосредоточиться на задачах, которые вы можете выполнить в данный момент, и не тратить время на задачи, которые вы не можете выполнить в данный момент.
+
+В системе GTD контексты могут быть
+2023-04-01 21:19:47 | Response for 62408647 (model gpt-3.5-turbo): 2065 cont_tok + 200 compl_tok (0.00453 $ USD): Контекст в системе G
+2023-04-01 21:19:47 | Added transaction: user 62408647, chat 62408647, minus -0.00906 USD: GPT usage
+2023-04-01 21:19:47 | Counter skip 62408647: 0
+2023-04-01 21:20:01 | 62408647
+2023-04-01 21:20:01 | Checking subsription for 62408647
+2023-04-01 21:20:01 | {'user_id': 62408647, 'name': 'Дмитрий Козлов (@mr_garuda)', 'lang': 'rus', 'balance': 0.149264, 'banned': 0, 'subscribed': 1, 'ban_comment': '', 'subs_timestamp': datetime.datetime(2023, 4, 1, 17, 14, 46)}
+2023-04-01 21:20:01 | Save sub 62408647: True
+2023-04-01 21:20:01 | Logged 62408647: продолжай
+2023-04-01 21:20:15 | Logged 62408647: В системе GTD контексты могут быть различными, в зависимости от того, где вы можете выполнить задачу. Например, контексты могут включать:
+
+- Офис
+- Дом
+- Магазин
+- Компьютер
+- Телефон
+- Встреча
+
+Кроме того, вы можете создавать свои собственные контексты, которые соответствуют вашим потребностям и обязательствам.
+
+Контексты помогают сосредоточиться на задачах, которые вы можете выполнить в данный момент, и не тратить время на задачи, которые вы не можете выполнить в данный момент. К
+2023-04-01 21:20:15 | Response for 62408647 (model gpt-3.5-turbo): 2237 cont_tok + 200 compl_tok (0.004874 $ USD): В системе GTD контек
+2023-04-01 21:20:15 | Added transaction: user 62408647, chat 62408647, minus -0.009748 USD: GPT usage
+2023-04-01 21:20:15 | Counter skip 62408647: 0
+2023-04-01 21:20:19 | 62408647
+2023-04-01 21:22:39 | 62408647
+2023-04-01 21:23:39 | Logged 62408647: Расскажи про помодоро
+2023-04-01 21:52:41 | Messages skipped
+2023-04-01 21:52:41 | Bot started!
+2023-04-01 21:52:56 | 62408647
+2023-04-01 21:52:57 | Added transaction: user 62408647, chat 62408647,  0.2 USD: demo balance
+2023-04-01 21:52:57 | Checking subsription for 62408647
+2023-04-01 21:53:01 | 62408647
+2023-04-01 21:53:01 | Checking subsription for 62408647
+2023-04-01 21:53:01 | {'user_id': 62408647, 'name': 'Dmitry Kozlov (@mr_garuda)', 'lang': 'eng', 'balance': 0.2, 'banned': 0, 'subscribed': 0, 'ban_comment': '', 'subs_timestamp': datetime.datetime(2023, 4, 1, 17, 52, 57)}
+2023-04-01 21:53:01 | Save sub 62408647: True
+2023-04-01 21:53:05 | 62408647
+2023-04-01 21:53:05 | Added chat to DB: Dmitry Kozlov (@mr_garuda) (62408647), owner 62408647
+2023-04-01 21:53:05 | Logged 62408647: /clear_context
+2023-04-01 21:53:08 | 62408647
+2023-04-01 21:53:18 | 62408647
+2023-04-01 21:53:18 | Logged 62408647: hi there! who are you?
+2023-04-01 21:53:29 | Logged 62408647: Hello! I am an AI language model designed to assist and communicate with users. How can I assist you today?
+2023-04-01 21:53:29 | Response for 62408647 (model gpt-3.5-turbo): 25 cont_tok + 23 compl_tok (9.6e-05 $ USD): Hello! I am an AI la
+2023-04-01 21:53:29 | Added transaction: user 62408647, chat 62408647, minus -0.000192 USD: GPT usage
+2023-04-01 21:53:29 | Counter skip 62408647: 0
+2023-04-01 21:54:27 | 62408647
+2023-04-01 21:54:27 | Logged 62408647: write a little song about a nice kitty who found its family
+2023-04-01 21:54:50 | Logged 62408647: Verse 1:
+There was a little kitty, wandering all alone
+Looking for a family, to call its own
+It roamed the streets, with no place to go
+But deep inside, it knew it would find a home
+
+Chorus:
+Oh, the little kitty found its family
+With love and care, it's now happy as can be
+It purrs and plays, with a smile on its face
+Forever grateful, for this warm embrace
+
+Verse 2:
+The family saw the kitty, and knew it was meant to be
+They took it in, and gave it all the love it needs
+They cuddled and fed it, and gave it a cozy bed
+The kitty knew it was safe, and no longer had to dread
+
+Chorus:
+Oh, the little kitty found its family
+With love and care, it's now happy as can be
+It purrs and plays, with a smile on its face
+Forever grateful, for this warm embrace
+
+Bridge:
+Now the kitty's days are filled with joy
+Playing with toys, and chasing a toy mouse
+It's grateful for its family, and all they've done
+For giving it a home, and making it feel loved
+
+Chorus:
+Oh, the little kitty found its family
+With love and care, it's now happy as can be
+It purrs and plays, with a smile on its face
+Forever grateful, for this warm embrace
+
+Outro:
+So if you see a kitty, wandering all alone
+Remember this story, and give it a home
+For every kitty deserves love and care
+And with a family, they can thrive and share.
+2023-04-01 21:54:50 | Response for 62408647 (model gpt-3.5-turbo): 30 cont_tok + 336 compl_tok (0.000732 $ USD): Verse 1:
+There was a
+2023-04-01 21:54:50 | Added transaction: user 62408647, chat 62408647, minus -0.001464 USD: GPT usage
+2023-04-01 21:54:50 | Counter skip 62408647: 0
+2023-04-01 21:55:33 | 62408647
+2023-04-01 22:02:09 | Messages skipped
+2023-04-01 22:02:09 | Bot started!
+2023-04-01 22:02:15 | 62408647
+2023-04-01 22:02:15 | Checking subsription for 62408647
+2023-04-01 22:02:16 | 62408647
+2023-04-01 22:02:16 | Checking subsription for 62408647
+2023-04-01 22:02:16 | {'user_id': 62408647, 'name': 'Dmitry Kozlov (@mr_garuda)', 'lang': 'rus', 'balance': 0.198344, 'banned': 0, 'subscribed': 1, 'ban_comment': '', 'subs_timestamp': datetime.datetime(2023, 4, 1, 17, 53, 1)}
+2023-04-01 22:02:16 | Save sub 62408647: True
+2023-04-01 22:02:19 | 62408647
+2023-04-01 22:02:21 | 62408647
+2023-04-01 22:02:21 | 
+
+UPDATING ROLE in chat id=62408647
+2023-04-01 22:02:28 | 62408647
+2023-04-01 22:02:28 | Logged 62408647: hi do u do?
+2023-04-01 22:02:32 | Response for 62408647 (model gpt-3.5-turbo): 421 cont_tok + 37 compl_tok (0.000916 $ USD): As an AI language mo
+2023-04-01 22:02:32 | Added transaction: user 62408647, chat 62408647, minus -0.001832 USD: GPT usage
+2023-04-01 22:02:32 | Counter skip 62408647: 0
+2023-04-01 22:03:09 | Messages skipped
+2023-04-01 22:03:09 | Bot started!
+2023-04-01 22:04:31 | 62408647
+2023-04-01 22:04:31 | Logged 62408647: hi do u do?
+2023-04-01 22:04:36 | Response for 62408647 (model gpt-3.5-turbo): 431 cont_tok + 33 compl_tok (0.000928 $ USD): As an AI language mo
+2023-04-01 22:04:36 | Added transaction: user 62408647, chat 62408647, minus -0.001856 USD: GPT usage
+2023-04-01 22:04:36 | Counter skip 62408647: 0
+2023-04-01 22:04:37 | Logged 62408647: As an AI language model, I don't have emotions or feelings, but I'm always here to assist and communicate with you. How can I help you today?
+2023-04-01 22:04:43 | 62408647
+2023-04-01 22:04:54 | 62408647
+2023-04-01 22:04:55 | Logged 62408647: /clear_context
+2023-04-01 22:04:57 | 62408647
+2023-04-01 22:05:09 | 62408647
+2023-04-01 22:05:09 | Logged 62408647: tell me about a house kacj built
+2023-04-01 22:05:13 | Response for 62408647 (model gpt-3.5-turbo): 27 cont_tok + 38 compl_tok (0.00013 $ USD): I'm sorry, but I don
+2023-04-01 22:05:13 | Added transaction: user 62408647, chat 62408647, minus -0.00026 USD: GPT usage
+2023-04-01 22:05:13 | Counter skip 62408647: 0
+2023-04-01 22:05:14 | Logged 62408647: I'm sorry, but I don't have enough information to answer your question. Can you please provide more context or details about who Kacj is and which house you are referring to?
+2023-04-01 22:05:19 | 62408647
+2023-04-01 22:05:19 | Logged 62408647: i mean Jack
+2023-04-01 22:05:22 | Response for 62408647 (model gpt-3.5-turbo): 78 cont_tok + 18 compl_tok (0.000192 $ USD): Jack who? Can you pl
+2023-04-01 22:05:22 | Added transaction: user 62408647, chat 62408647, minus -0.000384 USD: GPT usage
+2023-04-01 22:05:22 | Counter skip 62408647: 0
+2023-04-01 22:05:23 | Logged 62408647: Jack who? Can you please provide more information about the specific Jack you are referring to?
+2023-04-01 22:05:37 | 62408647
+2023-04-01 22:05:37 | Logged 62408647: i mean an old story about a house Jack Built
+2023-04-01 22:05:47 | Response for 62408647 (model gpt-3.5-turbo): 116 cont_tok + 150 compl_tok (0.000532 $ USD): Ah, I see what you m
+2023-04-01 22:05:47 | Added transaction: user 62408647, chat 62408647, minus -0.001064 USD: GPT usage
+2023-04-01 22:05:47 | Counter skip 62408647: 0
+2023-04-01 22:05:49 | Logged 62408647: Ah, I see what you mean now. "The House That Jack Built" is a popular English nursery rhyme and cumulative tale that has been passed down through generations. 
+
+The rhyme tells the story of a house that Jack built, with each verse adding a new element to the story. For example, the first verse goes:
+
+"This is the house that Jack built.
+This is the malt that lay in the house that Jack built."
+
+The second verse adds:
+
+"This is the rat that ate the malt
+That lay in the house that Jack built."
+
+And so on, with each verse adding a new character or item to the story. The rhyme is often used as a teaching tool for young children to help them learn about sequencing and cause-and-effect relationships.
+2023-04-01 22:05:59 | 62408647
+2023-04-01 22:06:12 | 62408647
+2023-04-01 22:06:12 | Logged 62408647: now translate it to russian
+2023-04-01 22:06:31 | Response for 62408647 (model gpt-3.5-turbo): 281 cont_tok + 285 compl_tok (0.001132 $ USD): Sure, here is the tr
+2023-04-01 22:06:31 | Added transaction: user 62408647, chat 62408647, minus -0.002264 USD: GPT usage
+2023-04-01 22:06:31 | Counter skip 62408647: 0
+2023-04-01 22:06:32 | Logged 62408647: Sure, here is the translation of "The House That Jack Built" nursery rhyme into Russian:
+
+Это дом, который построил Джек.
+Это ячмень, который лежал в доме, который построил Джек.
+Это крыса, которая съела ячмень,
+Который лежал в доме, который построил Джек.
+Это кот, который поймал крысу,
+Которая съела ячмень,
+Который лежал в доме, который построил Джек.
+Это пёс, который догнал кота,
+Который поймал крысу,
+Которая съела ячмень,
+Который лежал в доме, который построил Джек.
+Это корова безрогая, которая доилась,
+Которая догнала пса,
+Который догнал кота,
+Который поймал крысу,
+Которая съела ячмень,
+Который лежал в доме, который построил Джек.
+2023-04-01 22:06:34 | 62408647
+2023-04-01 22:07:09 | 62408647
+2023-04-01 22:07:09 | Logged 62408647: now create 3 verses with same logic, but with "The Code that Dimitry wrote"
+2023-04-01 22:07:26 | Response for 62408647 (model gpt-3.5-turbo): 595 cont_tok + 227 compl_tok (0.001644 $ USD): Sure, here are three
+2023-04-01 22:07:26 | Added transaction: user 62408647, chat 62408647, minus -0.003288 USD: GPT usage
+2023-04-01 22:07:26 | Counter skip 62408647: 0
+2023-04-01 22:07:27 | Logged 62408647: Sure, here are three verses with the same logic as "The House That Jack Built", but with "The Code That Dmitry Wrote":
+
+Это код, который написал Дмитрий.
+Это строка, которая была в коде, который написал Дмитрий.
+Это функция, которая использовала строку,
+Которая была в коде, который написал Дмитрий.
+
+Это код, который написал Дмитрий.
+Это переменная, которая была в коде, который написал Дмитрий.
+Это цикл, который использовал переменную,
+Которая была в коде, который написал Дмитрий.
+
+Это код, который написал Дмитрий.
+Это класс, который был в коде, который написал Дмитрий.
+Это метод, который использовал класс,
+Который был в коде, который написал Дмитрий.
+2023-04-01 22:07:46 | 62408647
+2023-04-01 22:07:46 | Checking subsription for 62408647
+2023-04-01 22:07:46 | {'user_id': 62408647, 'name': 'Dmitry Kozlov (@mr_garuda)', 'lang': 'rus', 'balance': 0.187396, 'banned': 0, 'subscribed': 1, 'ban_comment': '', 'subs_timestamp': datetime.datetime(2023, 4, 1, 18, 2, 16)}
+2023-04-01 22:07:46 | Save sub 62408647: True
+2023-04-01 22:08:00 | 62408647
+2023-04-01 22:08:02 | 62408647
+2023-04-01 22:08:03 | 62408647
+2023-04-01 22:08:03 | 
+
+UPDATING ROLE in chat id=62408647
+2023-04-01 22:08:08 | 62408647
+2023-04-01 22:08:18 | 62408647
+2023-04-01 22:08:18 | Logged 62408647: tell me a little about yourself
+2023-04-01 22:08:27 | Response for 62408647 (model gpt-4): 22 cont_tok + 65 compl_tok (0.00456 $ USD): As an AI language mo
+2023-04-01 22:08:27 | Added transaction: user 62408647, chat 62408647, minus -0.00912 USD: GPT usage
+2023-04-01 22:08:27 | Counter skip 62408647: 0
+2023-04-01 22:08:28 | Logged 62408647: As an AI language model, I am designed to assist you with any questions or tasks you may have. I can help you find information, provide recommendations, and even carry on a conversation. My main goal is to be as useful as possible to you. If you have any questions or need assistance, feel free to ask!
+2023-04-01 22:09:02 | 62408647
+2023-04-01 22:09:02 | Logged 62408647: tell me how do i organize my day, if i have lots of things to do...
+2023-04-01 22:09:49 | Response for 62408647 (model gpt-4): 113 cont_tok + 411 compl_tok (0.02805 $ USD): Organizing your day 
+2023-04-01 22:09:49 | Added transaction: user 62408647, chat 62408647, minus -0.0561 USD: GPT usage
+2023-04-01 22:09:49 | Counter skip 62408647: 0
+2023-04-01 22:09:50 | Logged 62408647: Organizing your day when you have lots of things to do can be challenging, but with a little planning, you can make the most of your time. Here are some steps to help you organize your day:
+
+1. Make a list: Write down everything you need to accomplish. This can be on paper, in a digital document, or using a task management app.
+
+2. Prioritize tasks: Determine which tasks are most important or time-sensitive, and rank them in order of priority.
+
+3. Break down large tasks: If you have a big project or task, break it down into smaller, manageable tasks.
+
+4. Allocate time: Estimate how much time each task will take, and allocate an appropriate amount of time for each task in your schedule.
+
+5. Plan your day: Schedule your tasks in a way that makes sense for you. Some people prefer to tackle the most important tasks first, while others like to start with smaller tasks to build momentum. Consider your energy levels throughout the day and plan accordingly.
+
+6. Set realistic expectations: Don't try to cram too much into your day. Be realistic about what you can accomplish and avoid overloading your schedule.
+
+7. Create a routine: Establish a daily routine that includes time for work, breaks, meals, and self-care. This can help you stay on track and maintain a healthy work-life balance.
+
+8. Stay flexible: Be prepared to adjust your schedule if unexpected events or tasks arise. Keep some buffer time in your day for these situations.
+
+9. Use productivity techniques: Consider using techniques like the Pomodoro Technique, time blocking, or the Eisenhower Matrix to help you stay focused and manage your time effectively.
+
+10. Review your progress: At the end of the day, review your completed tasks and evaluate your productivity. This can help you identify areas for improvement and adjust your approach for the next day.
+
+Remember, it's important to find a system that works best for you. Experiment with different strategies and adjust your approach until you find a method that helps you stay organized and productive.
+2023-04-01 22:10:07 | 62408647
+2023-04-01 22:10:38 | 62408647
+2023-04-01 22:10:40 | 62408647
+2023-04-01 22:10:52 | 62408647
+2023-04-01 22:10:52 | Logged 62408647: user_vision: computer vision as seen by neural network
+2023-04-01 22:11:02 | Logged 62408647: image: https://oaidalleapiprodscus.blob.core.windows.net/private/org-2frGc4rL73N0JK5FZy5vMIU0/user-WYWbqcpVNyvugMdNfr2GaNL7/img-0NPDZkakGAndnycPC4Sdc9s8.png?st=2023-04-01T17%3A10%3A59Z&se=2023-04-01T19%3A10%3A59Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-04-01T15%3A35%3A57Z&ske=2023-04-02T15%3A35%3A57Z&sks=b&skv=2021-08-06&sig=xM6%2BkwXY9SPOi8QCo20wy0OIjnZvoChEXO6/OwP4dh0%3D
+2023-04-01 22:11:02 | Added transaction: user 62408647, chat 62408647, minus -0.018 USD: vision

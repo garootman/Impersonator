@@ -9,58 +9,45 @@ openai.api_key = openai_key
 encoding = tiktoken.get_encoding('gpt2')
 
 
-def calc_USD_spent (tokens_spent, model=DEFAULT_TEXT_MODEL):
+def calc_USD_spent (tokens_complete, tokens_context=0, model=DEFAULT_TEXT_MODEL):
     if model[:3] =='img':
-        return AI_MODELS[model]['ktoken_price']
+        return AI_MODELS[model]['image_price']
     else:
         if model not in AI_MODELS:
             model = DEFAULT_MODEL
-        return tokens_spent / 1000 * AI_MODELS[model]['ktoken_price']
+        if 'ktoken_price_context' not in AI_MODELS[model].keys():
+            AI_MODELS[model]['ktoken_price_context'] = AI_MODELS[model]['ktoken_price_complete']
+        total_spent = tokens_complete / 1000 * AI_MODELS[model]['ktoken_price_complete'] + tokens_context / 1000 * AI_MODELS[model]['ktoken_price_context']
+        return round(total_spent,10)
     
 
-async def get_openai_response (prompt, model=DEFAULT_TEXT_MODEL):
-    max_tokens = max(200, min(MAX_REQUEST_LENGHT - CONTIGENCY - estimate_token_count(prompt), 4095))
-    try:
-        resp = await openai.Completion.acreate(
-            engine=model,
-            prompt=prompt,
-            max_tokens=max_tokens,
-            n=1,
-            stop="###",
-            temperature=TEMPERATURE,
-        )
-        token_used = int(resp["usage"]["total_tokens"] )
-        resp = str(resp.choices[0].text).strip()
-    except Exception as e:
-        resp = (f"OpenAI error:\n{str(e)}")
-        token_used = 0
-    return resp, token_used
-
-
-async def get_openai_response2 (role_prompt, context, msg):
+async def get_openai_response3 (role_prompt, context, msg, model=DEFAULT_TEXT_MODEL):
     msg_list = [{'role':'system','content': role_prompt}, *context, {'role':'user', 'content':msg}]
 #    print (msg_list)
     req_tokens = 0
     for i in msg_list:
         req_tokens +=3
         req_tokens += estimate_token_count(i['content'])
-    max_tokens = min(max(4095 - CONTIGENCY - req_tokens, 200), 4095 - CONTIGENCY)
+    model_token_limit = AI_MODELS[model]['maxtokens'] - CONTIGENCY
+    max_tokens = min(model_token_limit - req_tokens, model_token_limit)
     
     try:
         resp = await openai.ChatCompletion.acreate(
-          model="gpt-3.5-turbo",
+          model=model,
           max_tokens=max_tokens,
           messages=msg_list,
           n=1,
           stop="###",
           temperature=TEMPERATURE
         )
-        token_used = int(resp["usage"]["total_tokens"] )
+        ct = int(resp["usage"]['completion_tokens'])
+        pt = int(resp["usage"]['prompt_tokens'])
         resp = str(resp.choices[0].message['content']).strip()
     except Exception as e:
         resp = (f"OpenAI error:\n{str(e)}")
-        token_used = 0
-    return resp, token_used
+        pt = 0
+        ct = 0
+    return resp, ct, pt
 
 
 
